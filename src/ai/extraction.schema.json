@@ -8,21 +8,22 @@
   "properties": {
     "items": {
       "type": "array",
+      "maxItems": 30,
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["type", "title", "evidence", "needs_review"],
+        "required": ["type", "title", "priority", "start_at", "due_at", "location", "assignee", "evidence", "time_precision", "date_expression", "confidence", "needs_review"],
         "properties": {
           "type": { "type": "string", "enum": ["task", "event", "note"] },
           "title": { "type": "string", "minLength": 1, "maxLength": 200 },
-          "priority": { "type": "string", "enum": ["high", "normal", "low"] },
+          "priority": { "type": "string", "enum": ["high", "normal", "low"], "description": "默认 normal；仅在原文明确表示紧急、重要或低优先级时使用 high 或 low" },
           "start_at": { "type": ["string", "null"], "format": "date-time" },
           "due_at": { "type": ["string", "null"], "format": "date-time" },
-          "location": { "type": ["string", "null"] },
-          "assignee": { "type": ["string", "null"] },
-          "evidence": { "type": "string", "minLength": 1 },
+          "location": { "type": ["string", "null"], "maxLength": 200, "description": "原文中逐字出现的地点，否则为 null" },
+          "assignee": { "type": ["string", "null"], "maxLength": 100, "description": "原文明确指定的负责人，否则为 null；不要把说话人的我当作当前用户" },
+          "evidence": { "type": "string", "minLength": 1, "maxLength": 1000, "description": "原文中的连续原样片段，必须逐字相同" },
           "time_precision": { "type": "string", "enum": ["minute", "day", "unknown"] },
-          "date_expression": { "type": ["string", "null"] },
+          "date_expression": { "type": ["string", "null"], "maxLength": 100, "description": "原文中逐字出现的时间表达式，如明天上午9点；否则为 null" },
           "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
           "needs_review": { "type": "boolean" }
         }

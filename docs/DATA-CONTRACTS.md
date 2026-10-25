@@ -212,6 +212,7 @@ Content-Type: application/json
 }
 ```
 
+- `sourceType`：`chat`（聊天）或 `notice`（通知）；
 - `receivedAt`：消息原始时间，能提供就提供；相对时间以它为基准；
 - `capturedAt`：用户粘贴进系统的时间；
 - 如果只有正文，没有来源时间，明确以 `capturedAt` 为基准，并在 UI 提示。
@@ -224,16 +225,16 @@ Content-Type: application/json
     {
       "type": "task",
       "title": "提交项目汇报 PPT",
-      "priority": "high",
+      "priority": "normal",
       "start_at": null,
       "due_at": "2026-10-26T20:00:00+08:00",
       "location": null,
-      "assignee": "我",
+      "assignee": null,
       "evidence": "请大家在下周一晚上 8 点之前把汇报 PPT 发给我",
       "time_precision": "minute",
       "date_expression": "下周一晚上 8 点",
       "confidence": 0.95,
-      "needs_review": false
+      "needs_review": true
     }
   ]
 }

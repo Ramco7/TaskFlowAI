@@ -3,16 +3,16 @@
     {
       "type": "task",
       "title": "提交项目汇报 PPT",
-      "priority": "high",
+      "priority": "normal",
       "start_at": null,
       "due_at": "2026-10-26T20:00:00+08:00",
       "location": null,
-      "assignee": "我",
+      "assignee": null,
       "evidence": "请大家在下周一晚上 8 点之前把汇报 PPT 发给我",
       "time_precision": "minute",
       "date_expression": "下周一晚上 8 点",
       "confidence": 0.95,
-      "needs_review": false
+      "needs_review": true
     },
     {
       "type": "event",
@@ -35,7 +35,7 @@
       "start_at": null,
       "due_at": "2026-10-27T10:00:00+08:00",
       "location": null,
-      "assignee": "我",
+      "assignee": null,
       "evidence": "记得带笔记本",
       "time_precision": "day",
       "date_expression": "会议当天",

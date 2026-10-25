@@ -3,8 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="TaskFlow AI V0.2：带截止时间、优先级、筛选、排序、编辑和搜索的待办清单">
+  <meta name="description" content="TaskFlow AI：待办清单与千问信息提取预览">
   <title>TaskFlow AI · 时间管理</title>
+  <link rel="stylesheet" href="src/ai/ai.css">
   <style>
     :root {
       --bg: #f4f6fb;
@@ -550,7 +551,7 @@
         <span class="brand-mark" aria-hidden="true">✓</span>
         TaskFlow AI
       </h1>
-      <p class="subtitle">V0.2 · 时间管理 · 截止日期、优先级、筛选、排序、编辑、搜索</p>
+      <p class="subtitle">V0.2 · 时间管理 · 待办清单与千问信息提取预览</p>
     </header>
 
     <section class="card" aria-label="待办清单">
@@ -623,7 +624,7 @@
     <footer>
       刷新页面不会丢任务；换设备/换浏览器不会自动同步。<br>
       当前使用 <code>localStorage</code>，云端同步将在 V0.3 加入。<br>
-      截止日期不选时间时，按当天 23:59 判定逾期；V0.2 暂未接入 AI，智能排序是规则排序，AI 提取将在 V0.4 加入。
+      截止日期不选时间时，按当天 23:59 判定逾期；智能排序是规则排序。AI 面板通过服务端调用千问模型。
     </footer>
   </main>
 
@@ -1536,5 +1537,6 @@
       input.focus();
     }());
   </script>
+  <script src="src/ai/ai-panel.js" defer></script>
 </body>
 </html>

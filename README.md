@@ -3,10 +3,10 @@
 面向碎片化信息的任务收集与时间管理应用。课程项目分三个 Feature 并行开发：
 
 - **Feature 1 · 云端数据管理**：登录、CloudBase 数据库、CRUD、跨设备同步、用户隔离；
-- **Feature 2 · AI 智能信息提取**：聊天/通知/网页文字 → 待办/日程/备忘；
+- **Feature 2 · AI 智能信息提取**：聊天记录或通知正文（可从网页复制）→ 待办/日程/备忘；
 - **Feature 3 · 可视化与分析**：日历、Dashboard、时间线。
 
-当前 `index.html` 是已可运行的 V0.2.1 基线，后续 Feature 在独立目录开发，通过 `window.TaskFlow` 接入。
+当前 `index.html` 保留 V0.2.1 待办基线；Feature 2 已接入千问 `qwen3.8-flash` 的本地服务和人工确认界面。云端来源记录仍待负责人合并。
 
 ## 线上地址
 
@@ -31,20 +31,19 @@ bumpy-damselfly-d5fm66ql428df3c9
 - `localStorage` 持久化 + V0.1 迁移
 - 390px 手机布局
 - `window.TaskFlow` 集成 API
+- 本地千问信息提取、预览、编辑、人工确认及证据留存
 
 ![手机端列表](screenshots/v021-mobile.png)
 
 ## 快速开始
 
-```powershell
-# 任选一种
-python -m http.server 8766 --directory .
-# 或直接双击 index.html
+AI 功能需要服务端环境变量 `BDCCP_API`。从仓库根目录运行：
+
+```sh
+/opt/homebrew/Caskroom/miniconda/base/bin/conda run -n py312 python -m uvicorn src.ai.server.app:app --host 127.0.0.1 --port 8766
 ```
 
-打开 `http://127.0.0.1:8766/`。
-
-没有构建步骤，没有 npm 依赖。
+打开 `http://127.0.0.1:8766/`。依赖安装和接口说明见 [src/ai/README.md](src/ai/README.md)。待办清单仍可单独静态打开，但 AI 提取需要上述服务。
 
 ## 仓库结构
 
@@ -66,7 +65,7 @@ python -m http.server 8766 --directory .
 ├── src/
 │   ├── shared/task.schema.json
 │   ├── cloud/README.md        Feature 1 目录
-│   ├── ai/README.md           Feature 2 目录
+│   ├── ai/                   Feature 2 界面、接口、校验、评测
 │   └── visualization/README.md
 ├── mock/
 │   ├── tasks.json             12 条任务
@@ -126,7 +125,7 @@ tcb login
 .\deploy.cmd
 ```
 
-只上传 `index.html`，不会上传 docs/mock/截图。
+静态脚本上传 `index.html` 和 AI 面板资源；`/api/extract` 的公网云函数尚未由负责人接入，因此当前真实提取流程以本地服务运行。
 
 ## 验收
 
@@ -141,7 +140,7 @@ V0.2.1 基线：
 ## 安全
 
 - 不提交 `.env`、API Key、数据库密码、CloudBase 登录态；
-- AI Key 只在本地 `.env` 或云函数环境变量；
+- AI Key 只由启动本地服务的环境变量提供；云端集成时改由云函数环境变量提供；
 - 不提交真实聊天记录、手机号、邮箱；
 - 数据库用户/密钥最小权限，离职/结束后轮换。
 
@@ -149,5 +148,5 @@ V0.2.1 基线：
 
 1. 创建 Git 私有仓库并 push；
 2. 三个 Feature 按各自文档开分支；
-3. Feature 1 先做登录/数据库，Feature 2/3 先用 Mock；
+3. Feature 1 负责登录/数据库，Feature 2 本地使用真实模型，Feature 3 先用 Mock；
 4. 项目负责人按周合并、部署、验收。

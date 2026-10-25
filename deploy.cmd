@@ -8,6 +8,9 @@ if "%ENV_ID%"=="" set "ENV_ID=bumpy-damselfly-d5fm66ql428df3c9"
 if exist dist rmdir /s /q dist
 mkdir dist
 copy /y index.html dist\index.html >nul
+mkdir dist\src\ai
+copy /y src\ai\ai-panel.js dist\src\ai\ai-panel.js >nul
+copy /y src\ai\ai.css dist\src\ai\ai.css >nul
 
 if defined TCB_CMD (
   call "%TCB_CMD%" hosting deploy .\dist -e %ENV_ID% --safe

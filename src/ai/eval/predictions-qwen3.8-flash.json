@@ -1,0 +1,2172 @@
+{
+  "synthetic-00-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "提交预算表",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "请在11月2日12点前提交预算表。",
+        "time_precision": "minute",
+        "date_expression": "11月2日12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3257,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-00-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "提交课程论文",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "请在11月2日12点前提交课程论文。",
+        "time_precision": "minute",
+        "date_expression": "11月2日12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3277,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-00-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "提交项目报告",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "请在11月2日12点前提交项目报告。",
+        "time_precision": "minute",
+        "date_expression": "11月2日12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3301,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-00-2": {
+    "items": [
+      {
+        "type": "task",
+        "title": "提交实验记录",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "请在11月2日12点前提交实验记录。",
+        "time_precision": "minute",
+        "date_expression": "11月2日12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3275,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-01-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送项目报告给老师",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T09:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "明天上午9点前把项目报告发给我。",
+        "time_precision": "minute",
+        "date_expression": "明天上午9点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2611,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-01-2": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送实验记录给老师",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T09:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "明天上午9点前把实验记录发给我",
+        "time_precision": "minute",
+        "date_expression": "明天上午9点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2671,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-00-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "提交设计稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "请在11月2日12点前提交设计稿",
+        "time_precision": "minute",
+        "date_expression": "11月2日12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2745,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-01-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送课程论文给老师",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T09:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "明天上午9点前把课程论文发给我",
+        "time_precision": "minute",
+        "date_expression": "明天上午9点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3180,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-01-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送设计稿给老师",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T09:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "明天上午9点前把设计稿发给我。",
+        "time_precision": "minute",
+        "date_expression": "明天上午9点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2725,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-01-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送预算表给老师",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T09:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "明天上午9点前把预算表发给我",
+        "time_precision": "minute",
+        "date_expression": "明天上午9点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3004,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-02-0": {
+    "items": [
+      {
+        "type": "event",
+        "title": "项目报告讨论会",
+        "priority": "normal",
+        "start_at": "2026-10-27T10:00:00+08:00",
+        "due_at": null,
+        "location": "教学楼 A301",
+        "assignee": null,
+        "evidence": "下周二上午10点在教学楼 A301开项目报告讨论会",
+        "time_precision": "minute",
+        "date_expression": "下周二上午10点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3145,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-02-1": {
+    "items": [
+      {
+        "type": "event",
+        "title": "课程论文讨论会",
+        "priority": "normal",
+        "start_at": "2026-10-27T10:00:00+08:00",
+        "due_at": null,
+        "location": "图书馆 204",
+        "assignee": null,
+        "evidence": "下周二上午10点在图书馆 204开课程论文讨论会。",
+        "time_precision": "minute",
+        "date_expression": "下周二上午10点",
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2748,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-02-4": {
+    "items": [
+      {
+        "type": "event",
+        "title": "设计稿讨论会",
+        "priority": "normal",
+        "start_at": "2026-10-27T10:00:00+08:00",
+        "due_at": null,
+        "location": "行政楼 108",
+        "assignee": null,
+        "evidence": "下周二上午10点在行政楼 108开设计稿讨论会",
+        "time_precision": "minute",
+        "date_expression": "下周二上午10点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2248,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-02-3": {
+    "items": [
+      {
+        "type": "event",
+        "title": "预算表讨论会",
+        "priority": "normal",
+        "start_at": "2026-10-27T10:00:00+08:00",
+        "due_at": null,
+        "location": "会议室 3",
+        "assignee": null,
+        "evidence": "下周二上午10点在会议室 3开预算表讨论会。",
+        "time_precision": "minute",
+        "date_expression": "下周二上午10点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2691,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-02-2": {
+    "items": [
+      {
+        "type": "event",
+        "title": "实验记录讨论会",
+        "priority": "normal",
+        "start_at": "2026-10-27T10:00:00+08:00",
+        "due_at": null,
+        "location": "创新楼 B502",
+        "assignee": null,
+        "evidence": "下周二上午10点在创新楼 B502开实验记录讨论会",
+        "time_precision": "minute",
+        "date_expression": "下周二上午10点",
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3140,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-03-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成项目报告",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T18:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周一18点前完成项目报告",
+        "time_precision": "minute",
+        "date_expression": "周一18点前",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "发送项目报告给小王",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-27T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周二12点前发给小王",
+        "time_precision": "minute",
+        "date_expression": "周二12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4888,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-03-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成预算表",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T18:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周一18点前完成预算表",
+        "time_precision": "minute",
+        "date_expression": "周一18点前",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "发给小赵",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-27T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周二12点前发给小赵",
+        "time_precision": "minute",
+        "date_expression": "周二12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3551,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-03-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成课程论文",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T18:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周一18点前完成课程论文",
+        "time_precision": "minute",
+        "date_expression": "周一18点前",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "将课程论文发给小李",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-27T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周二12点前发给小李",
+        "time_precision": "minute",
+        "date_expression": "周二12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4101,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-03-2": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成实验记录",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T18:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周一18点前完成实验记录",
+        "time_precision": "minute",
+        "date_expression": "周一18点前",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "发送实验记录给小陈",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-27T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周二12点前发给小陈",
+        "time_precision": "minute",
+        "date_expression": "周二12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4745,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-03-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成设计稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T18:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周一18点前完成设计稿",
+        "time_precision": "minute",
+        "date_expression": "周一18点前",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "发送设计稿给小周",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-27T12:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "周二12点前发给小周",
+        "time_precision": "minute",
+        "date_expression": "周二12点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4660,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-04-1": {
+    "items": [
+      {
+        "type": "event",
+        "title": "课程论文汇报",
+        "priority": "normal",
+        "start_at": "2026-11-03T14:00:00+08:00",
+        "due_at": null,
+        "location": "图书馆 204",
+        "assignee": null,
+        "evidence": "11月3日14点在图书馆 204做课程论文汇报",
+        "time_precision": "minute",
+        "date_expression": "11月3日14点",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "交幻灯片",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T20:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11月2日20点前交幻灯片",
+        "time_precision": "minute",
+        "date_expression": "11月2日20点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4306,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-04-2": {
+    "items": [
+      {
+        "type": "event",
+        "title": "实验记录汇报",
+        "priority": "normal",
+        "start_at": "2026-11-03T14:00:00+08:00",
+        "due_at": null,
+        "location": "创新楼 B502",
+        "assignee": null,
+        "evidence": "11月3日14点在创新楼 B502做实验记录汇报",
+        "time_precision": "minute",
+        "date_expression": "11月3日14点",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "交幻灯片",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T20:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11月2日20点前交幻灯片",
+        "time_precision": "minute",
+        "date_expression": "11月2日20点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4954,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-04-0": {
+    "items": [
+      {
+        "type": "event",
+        "title": "项目报告汇报",
+        "priority": "normal",
+        "start_at": "2026-11-03T14:00:00+08:00",
+        "due_at": null,
+        "location": "教学楼 A301",
+        "assignee": null,
+        "evidence": "11月3日14点在教学楼 A301做项目报告汇报",
+        "time_precision": "minute",
+        "date_expression": "11月3日14点",
+        "confidence": 1.0,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "交幻灯片",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T20:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11月2日20点前交幻灯片",
+        "time_precision": "minute",
+        "date_expression": "11月2日20点前",
+        "confidence": 1.0,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 6248,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-05-0": {
+    "items": [
+      {
+        "type": "note",
+        "title": "项目报告模板已上传学院网站",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "公告：项目报告模板已上传学院网站。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 1735,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-04-3": {
+    "items": [
+      {
+        "type": "event",
+        "title": "预算表汇报",
+        "priority": "normal",
+        "start_at": "2026-11-03T14:00:00+08:00",
+        "due_at": null,
+        "location": "会议室 3",
+        "assignee": null,
+        "evidence": "11月3日14点在会议室 3做预算表汇报",
+        "time_precision": "minute",
+        "date_expression": "11月3日14点",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "交幻灯片",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T20:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11月2日20点前交幻灯片",
+        "time_precision": "minute",
+        "date_expression": "11月2日20点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4494,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-05-1": {
+    "items": [
+      {
+        "type": "note",
+        "title": "课程论文模板已上传学院网站",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "公告：课程论文模板已上传学院网站。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2761,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-04-4": {
+    "items": [
+      {
+        "type": "event",
+        "title": "设计稿汇报",
+        "priority": "normal",
+        "start_at": "2026-11-03T14:00:00+08:00",
+        "due_at": null,
+        "location": "行政楼 108",
+        "assignee": null,
+        "evidence": "11月3日14点在行政楼 108做设计稿汇报",
+        "time_precision": "minute",
+        "date_expression": "11月3日14点",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "交幻灯片",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-02T20:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11月2日20点前交幻灯片",
+        "time_precision": "minute",
+        "date_expression": "11月2日20点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4779,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-05-3": {
+    "items": [
+      {
+        "type": "note",
+        "title": "预算表模板已上传学院网站",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "公告：预算表模板已上传学院网站。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 1.0,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2247,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-05-4": {
+    "items": [
+      {
+        "type": "note",
+        "title": "设计稿模板上传至学院网站",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "公告：设计稿模板已上传学院网站。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2237,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-06-0": {
+    "items": [
+      {
+        "type": "event",
+        "title": "讨论项目报告",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "下周找时间讨论项目报告",
+        "time_precision": "unknown",
+        "date_expression": "下周",
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2439,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-05-2": {
+    "items": [
+      {
+        "type": "note",
+        "title": "实验记录模板已上传学院网站",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "公告：实验记录模板已上传学院网站。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 1.0,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4172,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-06-1": {
+    "items": [
+      {
+        "type": "event",
+        "title": "讨论课程论文",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "下周找时间讨论课程论文",
+        "time_precision": "unknown",
+        "date_expression": "下周",
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2393,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-06-3": {
+    "items": [
+      {
+        "type": "event",
+        "title": "讨论预算表",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "下周找时间讨论预算表",
+        "time_precision": "unknown",
+        "date_expression": "下周",
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2078,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-06-4": {
+    "items": [
+      {
+        "type": "event",
+        "title": "讨论设计稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "下周找时间讨论设计稿",
+        "time_precision": "unknown",
+        "date_expression": "下周",
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2209,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-06-2": {
+    "items": [
+      {
+        "type": "event",
+        "title": "讨论实验记录",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "下周找时间讨论实验记录。",
+        "time_precision": "unknown",
+        "date_expression": "下周",
+        "confidence": 0.9,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3049,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-07-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "整理项目报告",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-05T23:59:00+08:00",
+        "location": null,
+        "assignee": "小王",
+        "evidence": "组长：小王负责在11月5日前整理项目报告。",
+        "time_precision": "day",
+        "date_expression": "11月5日前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2938,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-07-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "整理课程论文",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-05T23:59:00+08:00",
+        "location": null,
+        "assignee": "小李",
+        "evidence": "组长：小李负责在11月5日前整理课程论文。",
+        "time_precision": "day",
+        "date_expression": "11月5日前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2844,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-07-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "整理预算表",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-05T23:59:00+08:00",
+        "location": null,
+        "assignee": "小赵",
+        "evidence": "小赵负责在11月5日前整理预算表",
+        "time_precision": "day",
+        "date_expression": "11月5日",
+        "confidence": 1.0,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3181,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-07-2": {
+    "items": [
+      {
+        "type": "task",
+        "title": "整理实验记录",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-05T23:59:00+08:00",
+        "location": null,
+        "assignee": "小陈",
+        "evidence": "小陈负责在11月5日前整理实验记录。",
+        "time_precision": "day",
+        "date_expression": "11月5日前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3773,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-07-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "整理设计稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-05T23:59:00+08:00",
+        "location": null,
+        "assignee": "小周",
+        "evidence": "小周负责在11月5日前整理设计稿",
+        "time_precision": "day",
+        "date_expression": "11月5日前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2691,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-08-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "查看项目报告",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "大家有空时看看项目报告。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.85,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2018,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-08-2": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 959,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-08-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "查看课程论文",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "大家有空时看看课程论文",
+        "time_precision": "unknown",
+        "date_expression": "有空时",
+        "confidence": 0.9,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 1755,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-09-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "备份项目报告",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "记得备份项目报告。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2194,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-08-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "查看设计稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "大家有空时看看设计稿。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.9,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2457,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-09-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "备份课程论文",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "记得备份课程论文。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2061,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-08-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "查看预算表",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "大家有空时看看预算表。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.9,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4013,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-10-0": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 1035,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-09-2": {
+    "items": [
+      {
+        "type": "task",
+        "title": "备份实验记录",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "记得备份实验记录。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2384,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-09-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "备份预算表",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "记得备份预算表。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2452,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-10-1": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 651,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-10-2": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 645,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-09-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "备份设计稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "记得备份设计稿。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2781,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-10-3": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 679,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-11-0": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 509,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-11-1": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 667,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-11-2": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 627,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-10-4": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 998,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-11-4": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 622,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-11-3": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 888,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-12-0": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 599,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-12-1": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 680,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-12-3": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 732,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-12-2": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 803,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-12-4": {
+    "items": [],
+    "model": "qwen3.8-flash",
+    "durationMs": 838,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-13-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "提交报名项目报告",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "报名项目报告的截止日期为10月31日",
+        "time_precision": "day",
+        "date_expression": "10月31日",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2622,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-13-2": {
+    "items": [
+      {
+        "type": "task",
+        "title": "报名实验记录",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "报名实验记录的截止日期为10月31日",
+        "time_precision": "day",
+        "date_expression": "10月31日",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2747,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-13-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "报名课程论文",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "报名课程论文的截止日期为10月31日",
+        "time_precision": "day",
+        "date_expression": "10月31日",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2795,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-13-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "提交报名预算表",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "公告：报名预算表的截止日期为10月31日。",
+        "time_precision": "day",
+        "date_expression": "10月31日",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2873,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-13-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "报名设计稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "公告：报名设计稿的截止日期为10月31日。",
+        "time_precision": "day",
+        "date_expression": "10月31日",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2372,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-14-2": {
+    "items": [
+      {
+        "type": "event",
+        "title": "实验记录说明会",
+        "priority": "normal",
+        "start_at": "2026-10-25T19:00:00+08:00",
+        "due_at": null,
+        "location": "创新楼 B502",
+        "assignee": null,
+        "evidence": "今晚19点到创新楼 B502参加实验记录说明会。",
+        "time_precision": "minute",
+        "date_expression": "今晚19点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2983,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-14-0": {
+    "items": [
+      {
+        "type": "event",
+        "title": "项目报告说明会",
+        "priority": "normal",
+        "start_at": "2026-10-25T19:00:00+08:00",
+        "due_at": null,
+        "location": "教学楼 A301",
+        "assignee": null,
+        "evidence": "今晚19点到教学楼 A301参加项目报告说明会。",
+        "time_precision": "minute",
+        "date_expression": "今晚19点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3187,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-14-1": {
+    "items": [
+      {
+        "type": "event",
+        "title": "课程论文说明会",
+        "priority": "normal",
+        "start_at": "2026-10-25T19:00:00+08:00",
+        "due_at": null,
+        "location": "图书馆 204",
+        "assignee": null,
+        "evidence": "今晚19点到图书馆 204参加课程论文说明会。",
+        "time_precision": "minute",
+        "date_expression": "今晚19点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3248,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-14-3": {
+    "items": [
+      {
+        "type": "event",
+        "title": "预算表说明会",
+        "priority": "normal",
+        "start_at": "2026-10-25T19:00:00+08:00",
+        "due_at": null,
+        "location": "会议室 3",
+        "assignee": null,
+        "evidence": "今晚19点到会议室 3参加预算表说明会。",
+        "time_precision": "minute",
+        "date_expression": "今晚19点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2815,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-14-4": {
+    "items": [
+      {
+        "type": "event",
+        "title": "设计稿说明会",
+        "priority": "normal",
+        "start_at": "2026-10-25T19:00:00+08:00",
+        "due_at": null,
+        "location": "行政楼 108",
+        "assignee": null,
+        "evidence": "今晚19点到行政楼 108参加设计稿说明会",
+        "time_precision": "minute",
+        "date_expression": "今晚19点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2722,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-15-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "检查课程论文",
+        "priority": "high",
+        "start_at": null,
+        "due_at": "2026-10-25T16:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "紧急：今天下午4点前检查课程论文",
+        "time_precision": "minute",
+        "date_expression": "今天下午4点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2777,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-15-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "检查项目报告",
+        "priority": "high",
+        "start_at": null,
+        "due_at": "2026-10-25T16:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "紧急：今天下午4点前检查项目报告",
+        "time_precision": "minute",
+        "date_expression": "今天下午4点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2891,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-15-2": {
+    "items": [
+      {
+        "type": "task",
+        "title": "检查实验记录",
+        "priority": "high",
+        "start_at": null,
+        "due_at": "2026-10-25T16:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "紧急：今天下午4点前检查实验记录",
+        "time_precision": "minute",
+        "date_expression": "今天下午4点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2511,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-15-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "检查预算表",
+        "priority": "high",
+        "start_at": null,
+        "due_at": "2026-10-25T16:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "紧急：今天下午4点前检查预算表",
+        "time_precision": "minute",
+        "date_expression": "今天下午4点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2125,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-16-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成项目报告初稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "月底前完成项目报告初稿。",
+        "time_precision": "day",
+        "date_expression": "月底前",
+        "confidence": 0.9,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2499,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-15-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "检查设计稿",
+        "priority": "high",
+        "start_at": null,
+        "due_at": "2026-10-25T16:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "紧急：今天下午4点前检查设计稿",
+        "time_precision": "minute",
+        "date_expression": "今天下午4点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3593,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-16-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成课程论文初稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "月底前完成课程论文初稿。",
+        "time_precision": "day",
+        "date_expression": "月底",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2884,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-16-2": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成实验记录初稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "老师：月底前完成实验记录初稿。",
+        "time_precision": "day",
+        "date_expression": "月底前",
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2613,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-16-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成预算表初稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "月底前完成预算表初稿",
+        "time_precision": "day",
+        "date_expression": "月底",
+        "confidence": 0.9,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2334,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-16-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "完成设计稿初稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-31T23:59:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "月底前完成设计稿初稿",
+        "time_precision": "day",
+        "date_expression": "月底",
+        "confidence": 0.95,
+        "needs_review": true
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2437,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-17-0": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送项目报告到群里",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-01T18:00:00+08:00",
+        "location": null,
+        "assignee": "小王",
+        "evidence": "小王请在11月1日18点之前把项目报告发到群里",
+        "time_precision": "minute",
+        "date_expression": "11月1日18点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2452,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-17-1": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送课程论文到群里",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-01T18:00:00+08:00",
+        "location": null,
+        "assignee": "小李",
+        "evidence": "组长：小李请在11月1日18点之前把课程论文发到群里。",
+        "time_precision": "minute",
+        "date_expression": "11月1日18点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3079,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-17-2": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送实验记录到群里",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-01T18:00:00+08:00",
+        "location": null,
+        "assignee": "小陈",
+        "evidence": "组长：小陈请在11月1日18点之前把实验记录发到群里。",
+        "time_precision": "minute",
+        "date_expression": "11月1日18点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2869,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-17-3": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送预算表到群里",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-01T18:00:00+08:00",
+        "location": null,
+        "assignee": "小赵",
+        "evidence": "小赵请在11月1日18点之前把预算表发到群里。",
+        "time_precision": "minute",
+        "date_expression": "11月1日18点",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2196,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-17-4": {
+    "items": [
+      {
+        "type": "task",
+        "title": "发送设计稿到群里",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-01T18:00:00+08:00",
+        "location": null,
+        "assignee": "小周",
+        "evidence": "小周请在11月1日18点之前把设计稿发到群里",
+        "time_precision": "minute",
+        "date_expression": "11月1日18点之前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2325,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-18-3": {
+    "items": [
+      {
+        "type": "event",
+        "title": "会议室3开会",
+        "priority": "normal",
+        "start_at": "2026-11-04T09:00:00+08:00",
+        "due_at": null,
+        "location": "会议室 3",
+        "assignee": null,
+        "evidence": "11月4日9点开始在会议室 3开会",
+        "time_precision": "minute",
+        "date_expression": "11月4日9点",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "提交预算表",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-04T11:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11点前提交预算表",
+        "time_precision": "minute",
+        "date_expression": "11点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3366,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-18-1": {
+    "items": [
+      {
+        "type": "event",
+        "title": "开会",
+        "priority": "normal",
+        "start_at": "2026-11-04T09:00:00+08:00",
+        "due_at": null,
+        "location": "图书馆 204",
+        "assignee": null,
+        "evidence": "11月4日9点开始在图书馆 204开会",
+        "time_precision": "minute",
+        "date_expression": "11月4日9点开始",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "提交课程论文",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-04T11:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11点前提交课程论文",
+        "time_precision": "minute",
+        "date_expression": "11点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4275,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-18-0": {
+    "items": [
+      {
+        "type": "event",
+        "title": "开会",
+        "priority": "normal",
+        "start_at": "2026-11-04T09:00:00+08:00",
+        "due_at": null,
+        "location": "教学楼 A301",
+        "assignee": null,
+        "evidence": "11月4日9点开始在教学楼 A301开会",
+        "time_precision": "minute",
+        "date_expression": "11月4日9点",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "提交项目报告",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-04T11:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11点前提交项目报告",
+        "time_precision": "minute",
+        "date_expression": "11点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 4526,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-18-2": {
+    "items": [
+      {
+        "type": "event",
+        "title": "开会",
+        "priority": "normal",
+        "start_at": "2026-11-04T09:00:00+08:00",
+        "due_at": null,
+        "location": "创新楼 B502",
+        "assignee": null,
+        "evidence": "11月4日9点开始在创新楼 B502开会",
+        "time_precision": "minute",
+        "date_expression": "11月4日9点开始",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "提交实验记录",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-04T11:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11点前提交实验记录",
+        "time_precision": "minute",
+        "date_expression": "11点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3976,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-19-0": {
+    "items": [
+      {
+        "type": "note",
+        "title": "项目报告参考资料存放位置",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "提示：项目报告的参考资料在学院资料库。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2552,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-19-1": {
+    "items": [
+      {
+        "type": "note",
+        "title": "课程论文参考资料位置",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "提示：课程论文的参考资料在学院资料库。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 1.0,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2514,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-19-2": {
+    "items": [
+      {
+        "type": "note",
+        "title": "实验记录参考资料存放位置",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "提示：实验记录的参考资料在学院资料库。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 3217,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-19-4": {
+    "items": [
+      {
+        "type": "note",
+        "title": "设计稿参考资料位置",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "提示：设计稿的参考资料在学院资料库。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 1972,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-19-3": {
+    "items": [
+      {
+        "type": "note",
+        "title": "预算表参考资料位置",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "提示：预算表的参考资料在学院资料库。",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 2157,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  },
+  "synthetic-18-4": {
+    "items": [
+      {
+        "type": "event",
+        "title": "开会",
+        "priority": "normal",
+        "start_at": "2026-11-04T09:00:00+08:00",
+        "due_at": null,
+        "location": "行政楼 108",
+        "assignee": null,
+        "evidence": "11月4日9点开始在行政楼 108开会",
+        "time_precision": "minute",
+        "date_expression": "11月4日9点",
+        "confidence": 0.95,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "提交设计稿",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-11-04T11:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "11点前提交设计稿",
+        "time_precision": "minute",
+        "date_expression": "11点前",
+        "confidence": 0.95,
+        "needs_review": false
+      }
+    ],
+    "model": "qwen3.8-flash",
+    "durationMs": 5003,
+    "referenceTime": "2026-10-25T09:30:00+08:00",
+    "referenceSource": "receivedAt"
+  }
+}

@@ -1,0 +1,34 @@
+.ai-card { margin-top: 18px; padding: 18px; }
+.ai-card h2 { margin: 0 0 4px; font-size: 19px; }
+.ai-card p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+.ai-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.ai-field { display: grid; gap: 5px; color: var(--muted); font-size: 13px; }
+.ai-field.wide { grid-column: 1 / -1; }
+.ai-field input, .ai-field select, .ai-field textarea {
+  min-width: 0; width: 100%; border: 1px solid var(--line); border-radius: 10px;
+  padding: 9px 11px; background: #fbfcff; color: var(--text); font: inherit;
+}
+.ai-field textarea { min-height: 125px; resize: vertical; font-size: 14px; }
+.ai-field input:focus, .ai-field select:focus, .ai-field textarea:focus { outline: 2px solid var(--focus); border-color: var(--primary); }
+.ai-actions { display: flex; flex-wrap: wrap; gap: 9px; align-items: center; margin-top: 13px; }
+.ai-btn { border: 1px solid var(--line); border-radius: 10px; padding: 9px 14px; font: inherit; font-size: 14px; background: #fff; color: var(--text); cursor: pointer; }
+.ai-btn.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+.ai-btn:disabled { opacity: .55; cursor: not-allowed; }
+.ai-status { margin-top: 11px; min-height: 22px; color: var(--muted); font-size: 13px; }
+.ai-status.error { color: var(--danger); }
+.ai-preview { margin-top: 18px; }
+.ai-preview h3 { margin: 0 0 10px; font-size: 17px; }
+.ai-candidate { border: 1px solid var(--line); border-radius: 13px; padding: 13px; margin-bottom: 10px; background: #fff; }
+.ai-candidate.review { border-color: #f59e0b; background: #fffbeb; }
+.ai-candidate-head { display: flex; gap: 9px; align-items: center; margin-bottom: 10px; }
+.ai-candidate-head strong { font-size: 14px; }
+.ai-candidate-head span { color: var(--muted); font-size: 12px; }
+.ai-evidence { margin: 10px 0 0; padding: 8px 10px; border-left: 3px solid #93c5fd; background: #eff6ff; color: #334155; font-size: 13px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.ai-hint { font-size: 12px; color: var(--muted); }
+.ai-history { margin-top: 18px; }
+.ai-history h3 { margin: 0 0 8px; font-size: 16px; }
+.ai-history details { border-top: 1px solid var(--line); padding: 7px 0; font-size: 13px; }
+.ai-history summary { cursor: pointer; }
+.ai-history details p { margin: 5px 0; }
+.ai-history pre { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; background: #f8fafc; padding: 9px; border-radius: 8px; }
+@media (max-width: 560px) { .ai-grid { grid-template-columns: 1fr; } .ai-card { padding: 14px; } }
