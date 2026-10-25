@@ -10,13 +10,15 @@
     '<p>粘贴聊天记录或通知正文，调用千问提取后先预览再保存。原消息时间可帮助解析“明天”等表达。</p>' +
     '<div class="ai-mode">' +
       '<label><input type="radio" name="ai-mode" value="mock" checked> Mock 演示（无需 Key）</label>' +
-      '<label><input type="radio" name="ai-mode" value="real"> 真实模型（需本地服务）</label>' +
+      '<label><input type="radio" name="ai-mode" value="real"> 真实模型（云端/本地）</label>' +
       '<button type="button" class="ai-btn small" id="ai-fill-sample">填入示例</button>' +
     '</div>' +
     '<div class="ai-grid">' +
       '<label class="ai-field wide">原文<textarea id="ai-text" maxlength="20000" placeholder="在这里粘贴聊天记录或通知正文"></textarea></label>' +
       '<label class="ai-field">来源类型<select id="ai-source"><option value="chat">聊天</option><option value="notice">通知</option></select></label>' +
-      '<label class="ai-field">原消息时间（可选）<input id="ai-received" type="datetime-local"></label>' +
+      '<label class="ai-field">原消息时间（可选）' +
+        '<div class="ai-datetime"><input id="ai-received-date" type="date" aria-label="原消息日期"><input id="ai-received-time" type="time" aria-label="原消息时间，可留空"></div>' +
+      '</label>' +
       '<label class="ai-field wide">时区<input id="ai-timezone" value="Asia/Shanghai" spellcheck="false"></label>' +
     '</div>' +
     '<div class="ai-actions"><button type="button" class="ai-btn primary" id="ai-extract">调用千问提取</button></div>' +
@@ -29,7 +31,8 @@
   function byId(id) { return document.getElementById(id); }
   var textEl = byId("ai-text");
   var sourceEl = byId("ai-source");
-  var receivedEl = byId("ai-received");
+  var receivedDateEl = byId("ai-received-date");
+  var receivedTimeEl = byId("ai-received-time");
   var timezoneEl = byId("ai-timezone");
   var statusEl = byId("ai-status");
   var previewEl = byId("ai-preview");
@@ -53,7 +56,10 @@
     timezoneEl.value = mock.input.timezone || "Asia/Shanghai";
     textEl.value = mock.input.text;
     sourceEl.value = mock.input.sourceType || "chat";
-    receivedEl.value = zonedValue(mock.input.receivedAt);
+    var zoned = zonedValue(mock.input.receivedAt);
+    var parts = zoned ? zoned.split("T") : [];
+    receivedDateEl.value = parts[0] || "";
+    receivedTimeEl.value = parts[1] || "";
     setStatus("已填入示例；当前是 Mock 演示，不会调用真实模型。", false);
   }
 
@@ -269,7 +275,8 @@
         result.model = "mock-qwen3.8-flash";
         result.referenceTime = mock.input.receivedAt;
       } else {
-        payload = { text: text, sourceType: sourceEl.value, receivedAt: fromZoned(receivedEl.value),
+        payload = { text: text, sourceType: sourceEl.value,
+          receivedAt: receivedDateEl.value ? fromZoned(receivedDateEl.value + "T" + (receivedTimeEl.value || "00:00")) : null,
           capturedAt: new Date().toISOString(), timezone: timezoneEl.value.trim() || "Asia/Shanghai" };
         var response = await fetch(window.TASKFLOW_AI_API_URL || "/api/extract", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload) });
         if (!(response.headers.get("content-type") || "").includes("application/json")) {
