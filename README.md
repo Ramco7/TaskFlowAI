@@ -6,7 +6,7 @@
 - **Feature 2 · AI 智能信息提取**：聊天记录或通知正文（可从网页复制）→ 待办/日程/备忘；
 - **Feature 3 · 可视化与分析**：日历、Dashboard、时间线。
 
-当前 `index.html` 保留 V0.2.1 待办基线；Feature 2 已接入千问 `qwen3.8-flash` 的本地服务和人工确认界面。云端来源记录仍待负责人合并。
+当前 `index.html` 保留 V0.2.1 待办基线；Feature 2 已接入千问 `qwen3.8-flash` 的本地服务、Mock 演示和人工确认界面。云端来源记录仍待负责人合并。
 
 ## 线上地址
 
@@ -37,13 +37,31 @@ bumpy-damselfly-d5fm66ql428df3c9
 
 ## 快速开始
 
-AI 功能需要服务端环境变量 `BDCCP_API`。从仓库根目录运行：
+### 只看待办 / AI Mock 演示（不需要 Key）
 
-```sh
-/opt/homebrew/Caskroom/miniconda/base/bin/conda run -n py312 python -m uvicorn src.ai.server.app:app --host 127.0.0.1 --port 8766
+```powershell
+python -m http.server 8766
 ```
 
-打开 `http://127.0.0.1:8766/`。依赖安装和接口说明见 [src/ai/README.md](src/ai/README.md)。待办清单仍可单独静态打开，但 AI 提取需要上述服务。
+打开 `http://127.0.0.1:8766/`。AI 面板默认是 **Mock 演示**，不需要服务或 API Key；点「填入示例」再点「调用千问提取」即可看到完整预览/确认流程。
+
+### 真实模型（需要服务端 Key）
+
+Windows：
+
+```powershell
+$env:BDCCP_API = "你的百炼 Key"
+.\run-ai.cmd
+```
+
+或者手动：
+
+```powershell
+python -m pip install -r src/ai/server/requirements.txt
+python -m uvicorn src.ai.server.app:app --host 127.0.0.1 --port 8766
+```
+
+打开 `http://127.0.0.1:8766/`，把 AI 模式切到「真实模型」。依赖安装和接口说明见 [src/ai/README.md](src/ai/README.md)。
 
 ## 仓库结构
 
@@ -51,6 +69,8 @@ AI 功能需要服务端环境变量 `BDCCP_API`。从仓库根目录运行：
 .
 ├── index.html                 当前 V0.2.1 单文件应用
 ├── deploy.cmd                 CloudBase 静态部署
+├── run-ai.cmd                 Windows 本地 AI 服务
+├── .github/workflows/ai-tests.yml
 ├── docs/
 │   ├── PROJECT.md             项目定位、架构、Feature 边界
 │   ├── HTML-LOGIC.md          当前 HTML/JS 逻辑与扩展点
@@ -125,7 +145,7 @@ tcb login
 .\deploy.cmd
 ```
 
-静态脚本上传 `index.html` 和 AI 面板资源；`/api/extract` 的公网云函数尚未由负责人接入，因此当前真实提取流程以本地服务运行。
+静态脚本上传 `index.html` 和 AI 面板资源（含 Mock 示例）；`/api/extract` 的公网云函数尚未由负责人接入，因此公网 AI 默认使用 Mock，真实提取流程以本地服务运行。
 
 ## 验收
 

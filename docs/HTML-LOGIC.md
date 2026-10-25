@@ -66,6 +66,8 @@
   priority: 1,                 // 1 高 / 2 中 / 3 低
   dueAt: "2026-11-02T12:00:00.000Z", // UTC ISO 或 null
   dueHasTime: true,            // false = 全天，按当天 23:59 判定
+  kind: "task",                // task / event / note
+  startAt: null,               // 日程开始时间；普通任务 null
   createdAt: "2026-10-25T11:00:00.000Z",
   updatedAt: null
 }

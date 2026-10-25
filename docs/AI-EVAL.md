@@ -36,11 +36,11 @@
 - 浏览器端到端：粘贴聊天文字，真实 API 返回日程与待办；预览时间、地点、负责人，取消勾选待办后确认，只写入日程，原文与证据可在本地来源记录展开查看。
 - 标注审计：100 个唯一 ID、100 个标注条目，全部通过结构与证据校验。
 
-在仓库根目录用 conda `py312` 运行以下命令。评测脚本若有请求失败或非法输出，只报告失败样本，不输出准确率：
+在仓库根目录运行以下命令（Windows / macOS 通用）：
 
-```sh
-/opt/homebrew/Caskroom/miniconda/base/bin/conda run -n py312 python -m unittest src.ai.server.test_app -v
-/opt/homebrew/Caskroom/miniconda/base/bin/conda run -n py312 python -m src.ai.eval.evaluate --predictions src/ai/eval/predictions-qwen3.8-flash.json
+```powershell
+python -m unittest src.ai.server.test_app -v
+python -m src.ai.eval.evaluate --predictions src/ai/eval/predictions-qwen3.8-flash.json
 ```
 
 重新请求真实模型的命令见 `src/ai/README.md`。在线重测可能因模型服务更新或非确定性输出而得到不同数值，也会产生 API 用量。

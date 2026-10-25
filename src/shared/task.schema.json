@@ -12,6 +12,8 @@
     "priority": { "type": "integer", "enum": [1, 2, 3] },
     "dueAt": { "type": ["string", "null"], "format": "date-time" },
     "dueHasTime": { "type": "boolean" },
+    "kind": { "type": "string", "enum": ["task", "event", "note"] },
+    "startAt": { "type": ["string", "null"], "format": "date-time" },
     "createdAt": { "type": "string", "format": "date-time" },
     "updatedAt": { "type": ["string", "null"], "format": "date-time" },
     "userId": { "type": ["string", "null"] },

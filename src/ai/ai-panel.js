@@ -8,6 +8,11 @@
   host.setAttribute("aria-label", "AI 信息提取");
   host.innerHTML = '<h2>AI 信息提取</h2>' +
     '<p>粘贴聊天记录或通知正文，调用千问提取后先预览再保存。原消息时间可帮助解析“明天”等表达。</p>' +
+    '<div class="ai-mode">' +
+      '<label><input type="radio" name="ai-mode" value="mock" checked> Mock 演示（无需 Key）</label>' +
+      '<label><input type="radio" name="ai-mode" value="real"> 真实模型（需本地服务）</label>' +
+      '<button type="button" class="ai-btn small" id="ai-fill-sample">填入示例</button>' +
+    '</div>' +
     '<div class="ai-grid">' +
       '<label class="ai-field wide">原文<textarea id="ai-text" maxlength="20000" placeholder="在这里粘贴聊天记录或通知正文"></textarea></label>' +
       '<label class="ai-field">来源类型<select id="ai-source"><option value="chat">聊天</option><option value="notice">通知</option></select></label>' +
@@ -30,8 +35,27 @@
   var previewEl = byId("ai-preview");
   var historyEl = byId("ai-history");
   var extractBtn = byId("ai-extract");
+  var fillBtn = byId("ai-fill-sample");
   var candidates = [];
   var extractionContext = null;
+
+  function selectedMode() {
+    var chosen = document.querySelector('input[name="ai-mode"]:checked');
+    return chosen ? chosen.value : "mock";
+  }
+
+  function fillSample() {
+    var mock = window.TASKFLOW_AI_MOCK;
+    if (!mock || !mock.input) {
+      setStatus("Mock 示例未加载，请确认 src/ai/ai-mock.js 已部署。", true);
+      return;
+    }
+    timezoneEl.value = mock.input.timezone || "Asia/Shanghai";
+    textEl.value = mock.input.text;
+    sourceEl.value = mock.input.sourceType || "chat";
+    receivedEl.value = zonedValue(mock.input.receivedAt);
+    setStatus("已填入示例；当前是 Mock 演示，不会调用真实模型。", false);
+  }
 
   function setStatus(message, isError) {
     statusEl.textContent = message;
@@ -165,9 +189,16 @@
       if (match) when = match[1] + "T23:59:00" + match[2];
     }
     return {
-      id: id, title: (item.type === "event" ? "[日程] " : item.type === "note" ? "[备忘] " : "") + item.title,
-      completed: false, priority: {high: 1, normal: 2, low: 3}[item.priority] || 2,
-      dueAt: when, dueHasTime: Boolean(when && item.time_precision === "minute"), createdAt: new Date().toISOString(), updatedAt: null
+      id: id,
+      title: (item.type === "event" ? "[日程] " : item.type === "note" ? "[备忘] " : "") + item.title,
+      completed: false,
+      priority: {high: 1, normal: 2, low: 3}[item.priority] || 2,
+      dueAt: when,
+      dueHasTime: Boolean(when && item.time_precision === "minute"),
+      kind: item.type,
+      startAt: item.type === "event" ? item.start_at : null,
+      createdAt: new Date().toISOString(),
+      updatedAt: null
     };
   }
 
@@ -217,14 +248,36 @@
   async function extract() {
     var text = textEl.value.trim();
     if (!text || text.length > 20000) { setStatus("请输入 1–20000 字的原文。", true); return; }
-    extractBtn.disabled = true; candidates = []; previewEl.hidden = true; setStatus("正在提取…", false);
+    var mode = selectedMode();
+    extractBtn.disabled = true; candidates = []; previewEl.hidden = true;
+    setStatus(mode === "mock" ? "正在生成 Mock 预览…" : "正在调用真实模型…", false);
     try {
-      var payload = { text: text, sourceType: sourceEl.value, receivedAt: fromZoned(receivedEl.value),
-        capturedAt: new Date().toISOString(), timezone: timezoneEl.value.trim() || "Asia/Shanghai" };
-      var response = await fetch("/api/extract", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload) });
-      if (!(response.headers.get("content-type") || "").includes("application/json")) throw new Error("当前站点未部署提取接口，请通过 AI 服务启动页面。");
-      var result = await response.json();
-      if (!response.ok) throw new Error(result.error && result.error.message || "接口调用失败");
+      var payload;
+      var result;
+      if (mode === "mock") {
+        var mock = window.TASKFLOW_AI_MOCK;
+        if (!mock || !mock.input || !mock.output) throw new Error("Mock 示例未加载，请确认 src/ai/ai-mock.js 已部署。");
+        if (text !== mock.input.text) throw new Error("Mock 模式只支持示例文本，请点「填入示例」。");
+        payload = {
+          text: text,
+          sourceType: mock.input.sourceType,
+          receivedAt: mock.input.receivedAt,
+          capturedAt: mock.input.capturedAt || new Date().toISOString(),
+          timezone: mock.input.timezone || "Asia/Shanghai"
+        };
+        result = JSON.parse(JSON.stringify(mock.output));
+        result.model = "mock-qwen3.8-flash";
+        result.referenceTime = mock.input.receivedAt;
+      } else {
+        payload = { text: text, sourceType: sourceEl.value, receivedAt: fromZoned(receivedEl.value),
+          capturedAt: new Date().toISOString(), timezone: timezoneEl.value.trim() || "Asia/Shanghai" };
+        var response = await fetch("/api/extract", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload) });
+        if (!(response.headers.get("content-type") || "").includes("application/json")) {
+          throw new Error("当前站点未部署提取接口，请切换到 Mock 演示，或用 run-ai.cmd 启动本地服务。");
+        }
+        result = await response.json();
+        if (!response.ok) throw new Error(result.error && result.error.message || "接口调用失败");
+      }
       if (!Array.isArray(result.items)) throw new Error("接口未返回 items 数组");
       result.items.forEach(function (item) { validateCandidate(item, text); });
       extractionContext = Object.assign({}, payload, {referenceTime: result.referenceTime || payload.receivedAt || payload.capturedAt});
@@ -235,6 +288,7 @@
     finally { extractBtn.disabled = false; }
   }
 
+  fillBtn.addEventListener("click", fillSample);
   extractBtn.addEventListener("click", extract);
   renderHistory();
 }());

@@ -1,0 +1,30 @@
+name: ai-tests
+
+on:
+  push:
+    paths:
+      - "src/ai/**"
+      - "mock/ai-*.json"
+      - ".github/workflows/ai-tests.yml"
+      - "index.html"
+  pull_request:
+    paths:
+      - "src/ai/**"
+      - "mock/ai-*.json"
+      - ".github/workflows/ai-tests.yml"
+      - "index.html"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install dependencies
+        run: python -m pip install -r src/ai/server/requirements.txt
+      - name: Unit tests
+        run: python -m unittest src.ai.server.test_app -v
+      - name: Evaluate frozen predictions
+        run: python -m src.ai.eval.evaluate --predictions src/ai/eval/predictions-qwen3.8-flash.json

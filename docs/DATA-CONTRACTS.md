@@ -12,6 +12,8 @@
   "priority": 1,
   "dueAt": "2026-11-02T12:00:00.000Z",
   "dueHasTime": true,
+  "kind": "task",
+  "startAt": null,
   "createdAt": "2026-10-25T11:00:00.000Z",
   "updatedAt": null,
   "userId": "user-123",
@@ -27,6 +29,8 @@
 | `priority` | 1/2/3 | 是 | 高/中/低 |
 | `dueAt` | string/null | 否 | ISO 8601；统一存 UTC |
 | `dueHasTime` | boolean | 否 | false = 全天，按当天 23:59 判定 |
+| `kind` | `task`/`event`/`note` | 否 | 任务类型，默认 `task`；AI 日程/备忘投影用 |
+| `startAt` | string/null | 否 | 日程开始时间；普通任务为 null |
 | `createdAt` | string | 是 | ISO 8601 |
 | `updatedAt` | string/null | 否 | 最后修改时间，冲突检测用 |
 | `userId` | string/null | 云端必填 | 数据隔离 |

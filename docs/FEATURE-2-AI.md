@@ -35,7 +35,20 @@ JSON Schema / Pydantic 校验
 
 - API Key 放本地 `.env`，`.gitignore` 忽略；
 - 前端不能直接持有 Key；
-- 没有 Key 时提供 `mock` 模式，用 `mock/ai-output.json` 跑 UI。
+- 没有 Key 时使用页面里的 **Mock 演示** 模式（`src/ai/ai-mock.js`），不需要服务；
+- 真实模式在 Windows 上运行：
+
+```powershell
+$env:BDCCP_API = "你的百炼 Key"
+.\run-ai.cmd
+```
+
+或手动：
+
+```powershell
+python -m pip install -r src/ai/server/requirements.txt
+python -m uvicorn src.ai.server.app:app --host 127.0.0.1 --port 8766
+```
 
 ### 本地接口建议
 

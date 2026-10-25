@@ -1,17 +1,41 @@
 # Feature 2 · 千问信息提取
 
-本目录包含输入/预览/确认界面、`POST /api/extract` 接口、JSON Schema + Pydantic 校验、100 条合成标注样本和评测脚本。页面只有真实接口入口，模型固定为 `qwen3.8-flash`，密钥由服务端环境变量 `BDCCP_API` 提供。
+本目录包含输入/预览/确认界面、`POST /api/extract` 接口、JSON Schema + Pydantic 校验、100 条合成标注样本和评测脚本。模型固定为 `qwen3.8-flash`，密钥由服务端环境变量 `BDCCP_API` 提供。
+
+页面有两种模式：
+
+- **Mock 演示（默认）**：不需要服务/Key，点「填入示例」→「调用千问提取」即可走完预览/确认流程；公网静态部署也能用。
+- **真实模型**：需要本地 FastAPI 服务和 `BDCCP_API`。
+
+![AI 面板](../../screenshots/ai-panel.png)
 
 ## 本地运行
 
-确保 `BDCCP_API` 已在启动服务的终端环境中设置。在仓库根目录运行：
+### Mock 演示
 
-```sh
-/opt/homebrew/Caskroom/miniconda/base/bin/conda run -n py312 python -m pip install -r src/ai/server/requirements.txt
-/opt/homebrew/Caskroom/miniconda/base/bin/conda run -n py312 python -m uvicorn src.ai.server.app:app --host 127.0.0.1 --port 8766
+```powershell
+python -m http.server 8766
 ```
 
-打开 `http://127.0.0.1:8766/`，粘贴聊天记录或通知正文，按需要填写来源时间和时区，点击“调用千问提取”→编辑/勾选候选→“确认保存选中项”。来源类型为 `chat`（聊天）和 `notice`（通知）。**不要用 `python -m http.server` 或直接打开 `index.html` 来测试 AI**，那样没有 `/api/extract` 服务。
+打开 `http://127.0.0.1:8766/`，AI 模式保持「Mock 演示」，点「填入示例」。
+
+### 真实模型（Windows）
+
+```powershell
+$env:BDCCP_API = "你的百炼 Key"
+.\run-ai.cmd
+```
+
+或手动：
+
+```powershell
+python -m pip install -r src/ai/server/requirements.txt
+python -m uvicorn src.ai.server.app:app --host 127.0.0.1 --port 8766
+```
+
+打开 `http://127.0.0.1:8766/`，把 AI 模式切到「真实模型」，粘贴聊天记录或通知正文，按需要填写来源时间和时区，点击「调用千问提取」→ 编辑/勾选候选 →「确认保存选中项」。来源类型为 `chat`（聊天）和 `notice`（通知）。
+
+> 真实模型接口当前仅允许本机访问；公网部署前需接入登录、限流和云函数/云托管。
 
 ## 接口与密钥
 
@@ -25,15 +49,15 @@
 
 ## 校验与评测
 
-```sh
-/opt/homebrew/Caskroom/miniconda/base/bin/conda run -n py312 python -m unittest src.ai.server.test_app -v
-/opt/homebrew/Caskroom/miniconda/base/bin/conda run -n py312 python -m src.ai.eval.evaluate
+```powershell
+python -m unittest src.ai.server.test_app -v
+python -m src.ai.eval.evaluate
 ```
 
 第二条仅审计 100 条标注数据。启动本地服务后，运行真实模型评测：
 
-```sh
-/opt/homebrew/Caskroom/miniconda/base/bin/conda run -n py312 python -m src.ai.eval.evaluate --url http://127.0.0.1:8766/api/extract --concurrency 4 --save-predictions src/ai/eval/predictions-qwen3.8-flash.json
+```powershell
+python -m src.ai.eval.evaluate --url http://127.0.0.1:8766/api/extract --concurrency 4 --save-predictions src/ai/eval/predictions-qwen3.8-flash.json
 ```
 
 评测脚本只有在 100 条预测全部成功且通过校验时才输出 Precision、Recall、F1、字段准确率和来源字段无依据率。样本由 20 个手写场景模式各生成 5 个主题/人名/地点变体，为**合成测试集**；结果和已知漏检见 `docs/AI-EVAL.md`。上线前仍需用脱敏的真实场景样本做独立评测。

@@ -1,0 +1,69 @@
+window.TASKFLOW_AI_MOCK = {
+  "input": {
+    "sourceType": "chat",
+    "receivedAt": "2026-10-25T09:30:00+08:00",
+    "capturedAt": "2026-10-25T10:05:00+08:00",
+    "timezone": "Asia/Shanghai",
+    "text": "班长：下周二上午 10 点在教学楼 A301 开项目讨论会。请大家在下周一晚上 8 点之前把汇报 PPT 发给我，记得带笔记本。另外论文模板已经上传学院网站。"
+  },
+  "output": {
+    "items": [
+      {
+        "type": "task",
+        "title": "提交项目汇报 PPT",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-26T20:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "请大家在下周一晚上 8 点之前把汇报 PPT 发给我",
+        "time_precision": "minute",
+        "date_expression": "下周一晚上 8 点",
+        "confidence": 0.95,
+        "needs_review": true
+      },
+      {
+        "type": "event",
+        "title": "项目讨论会",
+        "priority": "normal",
+        "start_at": "2026-10-27T10:00:00+08:00",
+        "due_at": null,
+        "location": "教学楼 A301",
+        "assignee": null,
+        "evidence": "下周二上午 10 点在教学楼 A301 开项目讨论会",
+        "time_precision": "minute",
+        "date_expression": "下周二上午 10 点",
+        "confidence": 0.97,
+        "needs_review": false
+      },
+      {
+        "type": "task",
+        "title": "会议当天带笔记本",
+        "priority": "normal",
+        "start_at": null,
+        "due_at": "2026-10-27T10:00:00+08:00",
+        "location": null,
+        "assignee": null,
+        "evidence": "记得带笔记本",
+        "time_precision": "day",
+        "date_expression": "会议当天",
+        "confidence": 0.72,
+        "needs_review": true
+      },
+      {
+        "type": "note",
+        "title": "论文模板已上传学院网站",
+        "priority": "low",
+        "start_at": null,
+        "due_at": null,
+        "location": null,
+        "assignee": null,
+        "evidence": "论文模板已经上传学院网站",
+        "time_precision": "unknown",
+        "date_expression": null,
+        "confidence": 0.9,
+        "needs_review": true
+      }
+    ]
+  }
+};

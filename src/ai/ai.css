@@ -1,6 +1,10 @@
 .ai-card { margin-top: 18px; padding: 18px; }
 .ai-card h2 { margin: 0 0 4px; font-size: 19px; }
 .ai-card p { margin: 0 0 14px; color: var(--muted); font-size: 13px; }
+.ai-mode { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin: 0 0 13px; color: var(--muted); font-size: 13px; }
+.ai-mode label { display: inline-flex; gap: 5px; align-items: center; cursor: pointer; }
+.ai-mode input { accent-color: var(--primary); }
+.ai-btn.small { padding: 6px 10px; font-size: 12px; margin-left: auto; }
 .ai-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .ai-field { display: grid; gap: 5px; color: var(--muted); font-size: 13px; }
 .ai-field.wide { grid-column: 1 / -1; }
@@ -31,4 +35,4 @@
 .ai-history summary { cursor: pointer; }
 .ai-history details p { margin: 5px 0; }
 .ai-history pre { white-space: pre-wrap; overflow-wrap: anywhere; font: inherit; background: #f8fafc; padding: 9px; border-radius: 8px; }
-@media (max-width: 560px) { .ai-grid { grid-template-columns: 1fr; } .ai-card { padding: 14px; } }
+@media (max-width: 560px) { .ai-grid { grid-template-columns: 1fr; } .ai-card { padding: 14px; } .ai-btn.small { margin-left: 0; } }
