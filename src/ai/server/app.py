@@ -6,6 +6,7 @@ import json
 import os
 import re
 import time
+from collections import defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Literal
@@ -14,6 +15,7 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 import httpx
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, JSONResponse
 from jsonschema import Draft202012Validator, FormatChecker
 from pydantic import AwareDatetime, BaseModel, ConfigDict, Field, model_validator
@@ -214,7 +216,68 @@ def error(code: str, message: str, status: int) -> JSONResponse:
     return JSONResponse(status_code=status, content={"error": {"code": code, "message": message}})
 
 
+def error_body(code: str, message: str) -> dict:
+    return {"error": {"code": code, "message": message}}
+
+
+async def run_extraction(payload: ExtractRequest) -> tuple[dict, int]:
+    """Shared extraction path for the local FastAPI route and CloudBase function."""
+    started = time.perf_counter()
+    reference = payload.receivedAt or payload.capturedAt or datetime.now(ZoneInfo(payload.timezone))
+    reference_source = "receivedAt" if payload.receivedAt else "capturedAt" if payload.capturedAt else "serverTime"
+    if not os.getenv("BDCCP_API"):
+        return error_body("API_KEY_MISSING", "服务端未配置 BDCCP_API。"), 503
+    for attempt in range(2):
+        try:
+            raw = await call_qwen(payload, reference)
+            raw = normalize_output(raw, payload)
+            result = validate_output(raw, payload.text)
+            break
+        except httpx.HTTPStatusError as exc:
+            status = exc.response.status_code
+            if status in (401, 403):
+                return error_body("MODEL_AUTH_FAILED", "模型接口拒绝密钥，请检查 BDCCP_API 和接入地域。"), 502
+            if status == 429:
+                return error_body("MODEL_RATE_LIMITED", "模型接口限流，请稍后重试。"), 503
+            return error_body("MODEL_HTTP_ERROR", f"模型接口返回 HTTP {status}，请检查接入地址与模型权限。"), 502
+        except (httpx.HTTPError, KeyError, IndexError, json.JSONDecodeError, ValueError, RuntimeError, TypeError):
+            if attempt == 1:
+                # Do not log pasted source text, API key, or provider response.
+                return error_body("EXTRACTION_FAILED", "模型调用或输出校验失败，请稍后重试。"), 502
+
+    return {
+        "items": result.model_dump(mode="json")["items"],
+        "model": MODEL,
+        "durationMs": round((time.perf_counter() - started) * 1000),
+        "referenceTime": reference.isoformat(),
+        "referenceSource": reference_source,
+    }, 200
+
+
 app = FastAPI(title="TaskFlow AI extraction", version="0.1.0")
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["POST", "OPTIONS"],
+    allow_headers=["Content-Type"],
+)
+
+_RATE_LIMIT = int(os.getenv("AI_RATE_LIMIT_PER_MINUTE", "10"))
+_REQUEST_BUCKETS: dict[str, list[float]] = defaultdict(list)
+
+
+@app.middleware("http")
+async def rate_limit(request: Request, call_next):
+    if request.method == "POST" and request.url.path in {"/api/extract", "/"}:
+        forwarded = request.headers.get("x-forwarded-for")
+        ip = forwarded.split(",")[0].strip() if forwarded else (request.client.host if request.client else "unknown")
+        now = time.monotonic()
+        bucket = [stamp for stamp in _REQUEST_BUCKETS[ip] if now - stamp < 60]
+        _REQUEST_BUCKETS[ip] = bucket
+        if _RATE_LIMIT > 0 and len(bucket) >= _RATE_LIMIT:
+            return JSONResponse(status_code=429, content=error_body("RATE_LIMITED", "请求过于频繁，请稍后再试。"))
+        bucket.append(now)
+    return await call_next(request)
 
 
 @app.exception_handler(RequestValidationError)
@@ -226,43 +289,26 @@ async def invalid_request(_: Request, exc: RequestValidationError) -> JSONRespon
 
 @app.post("/api/extract")
 async def extract(payload: ExtractRequest, request: Request) -> JSONResponse:
-    started = time.perf_counter()
-    reference = payload.receivedAt or payload.capturedAt or datetime.now(ZoneInfo(payload.timezone))
-    reference_source = "receivedAt" if payload.receivedAt else "capturedAt" if payload.capturedAt else "serverTime"
-    if not request.client or request.client.host not in {"127.0.0.1", "::1", "testclient"}:
+    local_only = os.getenv("AI_LOCAL_ONLY", "").lower() in {"1", "true", "yes"}
+    if local_only and (not request.client or request.client.host not in {"127.0.0.1", "::1", "testclient"}):
         return error("LOCAL_ONLY", "真实模型接口目前仅供本地开发，部署前须接入登录和限流。", 403)
-    if not os.getenv("BDCCP_API"):
-        return error("API_KEY_MISSING", "服务端未配置 BDCCP_API。", 503)
-    for attempt in range(2):
-        try:
-            raw = await call_qwen(payload, reference)
-            raw = normalize_output(raw, payload)
-            result = validate_output(raw, payload.text)
-            break
-        except httpx.HTTPStatusError as exc:
-            status = exc.response.status_code
-            if status in (401, 403):
-                return error("MODEL_AUTH_FAILED", "模型接口拒绝密钥，请检查 BDCCP_API 和接入地域。", 502)
-            if status == 429:
-                return error("MODEL_RATE_LIMITED", "模型接口限流，请稍后重试。", 503)
-            return error("MODEL_HTTP_ERROR", f"模型接口返回 HTTP {status}，请检查接入地址与模型权限。", 502)
-        except (httpx.HTTPError, KeyError, IndexError, json.JSONDecodeError, ValueError, RuntimeError, TypeError) as exc:
-            if attempt == 1:
-                # Do not log pasted source text, API key, or provider response.
-                return error("EXTRACTION_FAILED", f"模型调用或输出校验失败：{type(exc).__name__}", 502)
+    content, status = await run_extraction(payload)
+    return JSONResponse(status_code=status, content=content)
 
-    return JSONResponse(content={
-        "items": result.model_dump(mode="json")["items"],
-        "model": MODEL,
-        "durationMs": round((time.perf_counter() - started) * 1000),
-        "referenceTime": reference.isoformat(),
-        "referenceSource": reference_source,
-    })
+
+@app.post("/")
+async def extract_root(payload: ExtractRequest, request: Request) -> JSONResponse:
+    return await extract(payload, request)
 
 
 @app.get("/")
 def index() -> FileResponse:
     return FileResponse(ROOT / "index.html")
+
+
+@app.get("/src/ai/ai-config.js")
+def ai_config() -> FileResponse:
+    return FileResponse(ROOT / "src/ai/ai-config.js")
 
 
 @app.get("/src/ai/ai-panel.js")

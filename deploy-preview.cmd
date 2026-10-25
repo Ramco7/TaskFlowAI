@@ -10,6 +10,7 @@ if exist dist-preview rmdir /s /q dist-preview
 mkdir dist-preview
 copy /y index.html dist-preview\index.html >nul
 mkdir dist-preview\src\ai
+copy /y src\ai\ai-config.js dist-preview\src\ai\ai-config.js >nul
 copy /y src\ai\ai-mock.js dist-preview\src\ai\ai-mock.js >nul
 copy /y src\ai\ai-panel.js dist-preview\src\ai\ai-panel.js >nul
 copy /y src\ai\ai.css dist-preview\src\ai\ai.css >nul

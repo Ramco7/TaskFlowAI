@@ -91,6 +91,7 @@ class ExtractionTests(unittest.TestCase):
         client = TestClient(app)
         self.assertEqual(client.get("/").status_code, 200)
         self.assertEqual(client.get("/src/ai/ai-panel.js").status_code, 200)
+        self.assertEqual(client.get("/src/ai/ai-config.js").status_code, 200)
         self.assertEqual(client.get("/src/ai/ai-mock.js").status_code, 200)
         self.assertEqual(client.get("/mock/ai-input.json").status_code, 404)
         self.assertEqual(client.get("/.env").status_code, 404)

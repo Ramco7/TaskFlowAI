@@ -22,9 +22,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
       - name: Install dependencies
         run: python -m pip install -r src/ai/server/requirements.txt
       - name: Unit tests
         run: python -m unittest src.ai.server.test_app -v
+      - name: Cloud function tests
+        run: node --test src/ai/cloud_function/test_index.js
       - name: Evaluate frozen predictions
         run: python -m src.ai.eval.evaluate --predictions src/ai/eval/predictions-qwen3.8-flash.json

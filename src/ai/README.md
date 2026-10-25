@@ -5,7 +5,7 @@
 页面有两种模式：
 
 - **Mock 演示（默认）**：不需要服务/Key，点「填入示例」→「调用千问提取」即可走完预览/确认流程；公网静态部署也能用。
-- **真实模型**：需要本地 FastAPI 服务和 `BDCCP_API`。
+- **真实模型**：本地用 FastAPI；公网用 CloudBase `ai-extract` 云函数。两者都需要 `BDCCP_API`。
 
 ![AI 面板](../../screenshots/ai-panel.png)
 
@@ -35,13 +35,19 @@ python -m uvicorn src.ai.server.app:app --host 127.0.0.1 --port 8766
 
 打开 `http://127.0.0.1:8766/`，把 AI 模式切到「真实模型」，粘贴聊天记录或通知正文，按需要填写来源时间和时区，点击「调用千问提取」→ 编辑/勾选候选 →「确认保存选中项」。来源类型为 `chat`（聊天）和 `notice`（通知）。
 
-> 真实模型接口当前仅允许本机访问；公网部署前需接入登录、限流和云函数/云托管。
+> 公网真实模型走 CloudBase 云函数：
+
+```text
+https://bumpy-damselfly-d5fm66ql428df3c9-1516532038.ap-shanghai.app.tcloudbase.com/api/extract
+```
+
+云函数部署和 `BDCCP_API` 配置见 [cloud_function/README.md](cloud_function/README.md)。
 
 ## 接口与密钥
 
 接口请求格式见 `docs/FEATURE-2-AI.md`。同一个 FastAPI 服务提供静态页面和 `/api/extract`。服务端使用百炼 OpenAI 兼容接口调用 `qwen3.8-flash` 的非思考模式及严格 JSON Schema 输出；默认使用北京地域 DashScope 地址。若密钥属于其他地域或专属业务空间，设置 `QWEN_BASE_URL` 为该地域 OpenAI 兼容 Base URL。
 
-接口检查输入长度、来源类型、带时区时间、IANA 时区；输出通过 JSON Schema、Pydantic 和证据原文子串校验。模型生成的地点、负责人、时间表达式若不在原文中，会被清空并标记待核对。空响应或非法输出重试一次。错误格式为 `{ "error": { "code": "...", "message": "..." } }`。密钥不会传到前端或写入日志。真实模型接口当前仅允许本机访问，公网部署前需由负责人接入登录与限流。
+接口检查输入长度、来源类型、带时区时间、IANA 时区；输出通过 JSON Schema、Pydantic 和证据原文子串校验。模型生成的地点、负责人、时间表达式若不在原文中，会被清空并标记待核对。空响应或非法输出重试一次。错误格式为 `{ "error": { "code": "...", "message": "..." } }`。密钥不会传到前端或写入日志。公网云函数已启用 CORS 和每实例基础限流；生产环境仍建议加登录/网关限流。
 
 ## 保存方式与合并接口
 

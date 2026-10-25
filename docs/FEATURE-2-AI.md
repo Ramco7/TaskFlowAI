@@ -186,15 +186,22 @@ Content-Type: application/json
 
 结果放 `docs/AI-EVAL.md`（Feature 负责人创建），包含失败案例分析。
 
-## 9. 云平台操作（只在集成阶段）
+## 9. 云平台操作（已接入）
 
-本地开发不需要云平台。最终演示时：
+本地开发不需要云平台。公网真实模型：
 
-1. 在 CloudBase 创建云函数（HTTP 触发）；
-2. 云函数环境变量配置 `DEEPSEEK_API_KEY`；
-3. 前端改调云函数 URL；
-4. 设置超时、并发、日志脱敏；
-5. 不在前端/仓库出现 Key。
+1. 部署 `ai-extract` 云函数（Nodejs18.15、事件函数）；
+2. 云函数环境变量配置 `BDCCP_API`（不要提交到仓库）；
+3. 通过 `cloudbaserc.json` 把 `/api/extract` 路由到该函数；
+4. `src/ai/ai-config.js` 在非 localhost 页面使用云函数地址；
+5. 设置超时 60s、内存 512MB、日志脱敏、每实例基础限流；
+6. 不在前端/仓库出现 Key。
+
+部署脚本：`src/ai/cloud_function/deploy.cmd`。
+
+公网端点：`https://bumpy-damselfly-d5fm66ql428df3c9-1516532038.ap-shanghai.app.tcloudbase.com/api/extract`。
+
+未配置 `BDCCP_API` 时端点返回 `503 API_KEY_MISSING`，符合预期。
 
 ## 10. 验收清单
 
@@ -207,7 +214,7 @@ Content-Type: application/json
 - [x] 预览可编辑、可取消勾选；
 - [x] 确认后才写入任务；
 - [x] 100 条评测有 Precision/Recall/日期准确率/幻觉率；
-- [ ] 本地 mock 模式可离线演示。
+- [x] 本地 mock 模式可离线演示。
 
 ## 11. 交付格式
 

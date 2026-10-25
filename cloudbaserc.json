@@ -1,0 +1,22 @@
+{
+  "$schema": "https://static.cloudbase.net/cli/cloudbaserc.schema.json",
+  "envId": "bumpy-damselfly-d5fm66ql428df3c9",
+  "functions": [
+    {
+      "name": "ai-extract",
+      "runtime": "Nodejs18.15",
+      "handler": "index.main",
+      "timeout": 60,
+      "memorySize": 512,
+      "installDependency": false
+    }
+  ],
+  "gateway": {
+    "routes": [
+      {
+        "path": "/api/extract",
+        "target": "function:ai-extract"
+      }
+    ]
+  }
+}

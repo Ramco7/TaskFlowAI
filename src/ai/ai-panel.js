@@ -271,7 +271,7 @@
       } else {
         payload = { text: text, sourceType: sourceEl.value, receivedAt: fromZoned(receivedEl.value),
           capturedAt: new Date().toISOString(), timezone: timezoneEl.value.trim() || "Asia/Shanghai" };
-        var response = await fetch("/api/extract", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload) });
+        var response = await fetch(window.TASKFLOW_AI_API_URL || "/api/extract", { method: "POST", headers: {"Content-Type": "application/json"}, body: JSON.stringify(payload) });
         if (!(response.headers.get("content-type") || "").includes("application/json")) {
           throw new Error("当前站点未部署提取接口，请切换到 Mock 演示，或用 run-ai.cmd 启动本地服务。");
         }

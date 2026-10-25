@@ -1,5 +1,6 @@
 dist/
 dist-preview/
+dist-function/
 node_modules/
 .env
 .env.*
