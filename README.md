@@ -10,13 +10,13 @@
 
 ## 线上地址
 
-main 基线：
+正式演示（main，含 Feature 2，AI 默认 Mock）：
 
 ```text
 https://bumpy-damselfly-d5fm66ql428df3c9-1516532038.tcloudbaseapp.com/
 ```
 
-Feature 2 预览（AI 面板，默认 Mock）：
+可选预览（旧的 `/preview-ai/` 路径，内容可能滞后于根路径）：
 
 ```text
 https://bumpy-damselfly-d5fm66ql428df3c9-1516532038.tcloudbaseapp.com/preview-ai/
