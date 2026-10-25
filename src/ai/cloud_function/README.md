@@ -44,6 +44,8 @@ Without `BDCCP_API`, the endpoint returns `503 API_KEY_MISSING`. With a valid ke
 it returns the same `{ items, model, durationMs, referenceTime, referenceSource }`
 shape as the local service.
 
+![Public real-model extraction](../../../screenshots/ai-public-real.png)
+
 ## Limits
 
 - 20,000 character input limit;
