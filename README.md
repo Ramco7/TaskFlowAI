@@ -22,6 +22,8 @@ Feature 2 预览（AI 面板，默认 Mock）：
 https://bumpy-damselfly-d5fm66ql428df3c9-1516532038.tcloudbaseapp.com/preview-ai/
 ```
 
+![AI 预览](screenshots/ai-preview-live.png)
+
 CloudBase 测试默认域名首次访问会有「页面访问提示」，点「确定访问」进入。环境 ID：
 
 ```text
