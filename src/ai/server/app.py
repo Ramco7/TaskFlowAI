@@ -270,6 +270,11 @@ def ai_panel() -> FileResponse:
     return FileResponse(ROOT / "src/ai/ai-panel.js")
 
 
+@app.get("/src/ai/ai-mock.js")
+def ai_mock() -> FileResponse:
+    return FileResponse(ROOT / "src/ai/ai-mock.js")
+
+
 @app.get("/src/ai/ai.css")
 def ai_css() -> FileResponse:
     return FileResponse(ROOT / "src/ai/ai.css")
