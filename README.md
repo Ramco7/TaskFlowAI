@@ -10,8 +10,16 @@
 
 ## 线上地址
 
+main 基线：
+
 ```text
 https://bumpy-damselfly-d5fm66ql428df3c9-1516532038.tcloudbaseapp.com/
+```
+
+Feature 2 预览（AI 面板，默认 Mock）：
+
+```text
+https://bumpy-damselfly-d5fm66ql428df3c9-1516532038.tcloudbaseapp.com/preview-ai/
 ```
 
 CloudBase 测试默认域名首次访问会有「页面访问提示」，点「确定访问」进入。环境 ID：
@@ -68,7 +76,8 @@ python -m uvicorn src.ai.server.app:app --host 127.0.0.1 --port 8766
 ```text
 .
 ├── index.html                 当前 V0.2.1 单文件应用
-├── deploy.cmd                 CloudBase 静态部署
+├── deploy.cmd                 CloudBase 静态部署（根路径）
+├── deploy-preview.cmd         AI 预览部署（/preview-ai/）
 ├── run-ai.cmd                 Windows 本地 AI 服务
 ├── .github/workflows/ai-tests.yml
 ├── docs/
@@ -142,7 +151,8 @@ tcb login
 然后：
 
 ```powershell
-.\deploy.cmd
+.\deploy.cmd            # 根路径（main 演示）
+.\deploy-preview.cmd    # /preview-ai/ AI 预览，不影响根路径
 ```
 
 静态脚本上传 `index.html` 和 AI 面板资源（含 Mock 示例）；`/api/extract` 的公网云函数尚未由负责人接入，因此公网 AI 默认使用 Mock，真实提取流程以本地服务运行。
