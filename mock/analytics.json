@@ -1,0 +1,38 @@
+{
+  "generatedAt": "2026-10-25T20:00:00+08:00",
+  "range": {
+    "start": "2026-10-19",
+    "end": "2026-10-25"
+  },
+  "totals": {
+    "all": 12,
+    "open": 8,
+    "completed": 4,
+    "overdue": 1
+  },
+  "completionRate": 0.3333,
+  "priorityDistribution": {
+    "high": 4,
+    "normal": 5,
+    "low": 3
+  },
+  "statusDistribution": {
+    "open": 8,
+    "completed": 4,
+    "overdue": 1
+  },
+  "weeklyCompleted": [
+    { "week": "2026-W40", "completed": 0 },
+    { "week": "2026-W41", "completed": 1 },
+    { "week": "2026-W42", "completed": 2 },
+    { "week": "2026-W43", "completed": 1 }
+  ],
+  "overdueTasks": [
+    {
+      "id": "mock-002",
+      "title": "整理上周项目讨论会纪要",
+      "dueAt": "2026-10-24T10:00:00.000Z",
+      "priority": 2
+    }
+  ]
+}

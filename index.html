@@ -1,0 +1,1540 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="TaskFlow AI V0.2：带截止时间、优先级、筛选、排序、编辑和搜索的待办清单">
+  <title>TaskFlow AI · 时间管理</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #6b7280;
+      --line: #e5e8f0;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --danger: #dc2626;
+      --done: #9ca3af;
+      --focus: rgba(37, 99, 235, .28);
+      --shadow: 0 12px 36px rgba(23, 32, 51, .08);
+      --radius: 18px;
+      --high: #dc2626;
+      --medium: #d97706;
+      --low: #64748b;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body { min-height: 100%; }
+
+    body {
+      margin: 0;
+      padding: 40px 16px 56px;
+      background:
+        radial-gradient(900px 420px at 50% -10%, #dbeafe 0%, rgba(219, 234, 254, 0) 70%),
+        var(--bg);
+      color: var(--text);
+      font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC",
+            "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .shell { width: 100%; max-width: 760px; margin: 0 auto; }
+
+    header { margin-bottom: 20px; }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 6px;
+      font-size: 26px;
+      letter-spacing: -.02em;
+    }
+
+    .brand-mark {
+      display: inline-grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #2563eb, #7c3aed);
+      color: #fff;
+      font-size: 18px;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, .28);
+    }
+
+    .subtitle { margin: 0; color: var(--muted); font-size: 14px; }
+
+    .card {
+      min-width: 0;
+      background: var(--card);
+      border: 1px solid rgba(229, 232, 240, .9);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .composer { padding: 16px 18px 14px; border-bottom: 1px solid var(--line); }
+
+    .composer-main { display: flex; gap: 10px; }
+
+    .composer input[type="text"],
+    .composer .due-custom input,
+    .composer select,
+    .tools input,
+    .tools select,
+    .edit-form input,
+    .edit-form select {
+      height: 44px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: #fbfcff;
+      color: var(--text);
+      font: inherit;
+      outline: none;
+      padding: 0 12px;
+      transition: border-color .15s, box-shadow .15s, background .15s;
+    }
+
+    .composer input[type="text"] { flex: 1; min-width: 0; }
+    .composer input[type="text"]:focus,
+    .composer .due-custom input:focus,
+    .composer select:focus,
+    .tools input:focus,
+    .tools select:focus,
+    .edit-form input:focus,
+    .edit-form select:focus {
+      border-color: var(--primary);
+      background: #fff;
+      box-shadow: 0 0 0 4px var(--focus);
+    }
+
+    .composer-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 10px 14px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .priority-field { display: inline-flex; align-items: center; gap: 7px; min-height: 34px; }
+
+    .composer-meta select { height: 36px; padding: 0 8px; }
+
+    .due-field { flex: 1 1 100%; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+
+    .due-field-label { color: var(--muted); font-size: 13px; }
+
+    .due-picker { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+
+    .due-quick { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .due-chip {
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: #fff;
+      color: #5b6475;
+      font: 13px/1 inherit;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .due-chip:hover { border-color: #cbd5e1; color: var(--text); }
+    .due-chip.active { border-color: #bcd0ff; background: #eef4ff; color: var(--primary); font-weight: 600; }
+    .due-chip:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+    .due-custom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px;
+      padding: 8px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fbfcff;
+    }
+
+    .due-custom[hidden] { display: none; }
+    .due-custom input[type="date"] { flex: 1 1 150px; min-width: 140px; width: auto; height: 36px; font-size: 13px; }
+    .due-custom input[type="time"] { flex: 0 1 105px; min-width: 90px; width: auto; height: 36px; font-size: 13px; }
+
+    .due-confirm {
+      height: 36px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--primary);
+      color: #fff;
+      font: 13px/1 inherit;
+      cursor: pointer;
+    }
+
+    .due-confirm:hover { background: var(--primary-hover); }
+
+    .due-cancel {
+      height: 36px;
+      padding: 0 8px;
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: 13px/1 inherit;
+      cursor: pointer;
+    }
+
+    .due-summary-row {
+      display: block;
+      min-height: 22px;
+      font-size: 12px;
+    }
+
+    .due-summary { display: inline; color: #5b6475; white-space: nowrap; }
+    .due-summary.empty { color: #98a1b2; }
+    .due-clear {
+      display: inline;
+      margin-left: 6px;
+      border: 0;
+      background: transparent;
+      color: #b91c1c;
+      font: 12px/1 inherit;
+      cursor: pointer;
+      padding: 3px 2px;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .due-warning { display: block; margin-top: 3px; color: #b91c1c; font-size: 12px; }
+    .due-warning[hidden] { display: none; }
+    .due-hint { display: block; margin-top: 3px; color: #98a1b2; font-size: 11px; }
+
+    .btn {
+      height: 44px;
+      padding: 0 18px;
+      border: 0;
+      border-radius: 11px;
+      background: var(--primary);
+      color: #fff;
+      font: 600 15px/1 inherit;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background .15s, transform .05s;
+      touch-action: manipulation;
+    }
+
+    .btn:hover { background: var(--primary-hover); }
+    .btn:active { transform: translateY(1px); }
+    .btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+    .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #f1f5ff;
+      color: #3b5bdb;
+      font-weight: 600;
+    }
+
+    .pill.overdue {
+      background: #fef2f2;
+      color: #b91c1c;
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .filters { display: flex; flex-wrap: wrap; gap: 6px; }
+
+    .filter-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      padding: 5px 9px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .filter-btn:hover { background: #f5f7fc; color: var(--text); }
+    .filter-btn.active { background: #eef4ff; color: var(--primary); border-color: #dbe7ff; font-weight: 600; }
+    .filter-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+    .filter-count {
+      min-width: 18px;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: #e9edf6;
+      color: #7b8496;
+      font-size: 11px;
+      line-height: 18px;
+      text-align: center;
+    }
+
+    .filter-btn.active .filter-count { background: #dbe7ff; color: var(--primary); }
+
+    .tools { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-left: auto; }
+    .tools input { width: 150px; height: 36px; font-size: 13px; }
+    .tools select { width: auto; height: 36px; padding: 0 6px; font-size: 13px; }
+
+    .clear-btn {
+      border: 0;
+      background: transparent;
+      color: var(--muted);
+      font: inherit;
+      font-size: 13px;
+      cursor: pointer;
+      padding: 5px 4px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .clear-btn:hover { color: var(--danger); }
+    .clear-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+    .clear-btn:disabled { opacity: .4; cursor: default; }
+
+    .sort-hint {
+      margin: 0;
+      padding: 0 18px 10px;
+      border-bottom: 1px solid var(--line);
+      color: #98a1b2;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    ul.tasks { list-style: none; margin: 0; padding: 6px 0; }
+
+    li.task {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 13px 18px;
+      border-bottom: 1px solid #f1f3f8;
+      border-left: 3px solid transparent;
+      animation: settle .16s ease-out;
+    }
+
+    li.task:last-child { border-bottom: 0; }
+    li.task.editing { animation: none; }
+    li.task.priority-1 { border-left-color: var(--high); }
+    li.task.priority-2 { border-left-color: var(--medium); }
+    li.task.priority-3 { border-left-color: var(--low); }
+    li.task.overdue { background: #fffafa; }
+
+    @keyframes settle {
+      from { opacity: 0; transform: translateY(-3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .check {
+      flex: 0 0 auto;
+      width: 21px;
+      height: 21px;
+      margin-top: 2px;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .task-main { flex: 1; min-width: 0; }
+
+    .task-head {
+      display: flex;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 6px 8px;
+    }
+
+    .task-title {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 550;
+      overflow-wrap: anywhere;
+    }
+
+    .task.done .task-title { color: var(--done); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 1px 7px;
+      border-radius: 999px;
+      font-size: 11px;
+      line-height: 18px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .badge.priority-1 { background: #fef2f2; color: #b91c1c; }
+    .badge.priority-2 { background: #fffbeb; color: #b45309; }
+    .badge.priority-3 { background: #f1f5f9; color: #475569; }
+    .badge.overdue { background: #fee2e2; color: #b91c1c; }
+
+    .task-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px 10px;
+      margin: 4px 0 0;
+      color: #98a1b2;
+      font-size: 12px;
+    }
+
+    .task-meta .due.overdue-text { color: #b91c1c; font-weight: 600; }
+
+    .task-actions {
+      flex: 0 0 auto;
+      display: flex;
+      gap: 3px;
+      align-items: center;
+    }
+
+    .icon-btn {
+      min-height: 32px;
+      border: 1px solid transparent;
+      background: transparent;
+      color: #6b7280;
+      font: 13px/1 inherit;
+      padding: 6px 8px;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .icon-btn:hover { color: var(--primary); background: #eef4ff; border-color: #dbe7ff; }
+    .icon-btn.delete:hover { color: var(--danger); background: #fef2f2; border-color: #fecaca; }
+    .icon-btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+
+    .edit-form { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+    .edit-top { display: flex; align-items: center; gap: 8px; }
+    .edit-top input[type="text"] { flex: 1; min-width: 0; height: 38px; }
+    .edit-controls { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 8px; }
+    .edit-priority { display: inline-flex; align-items: center; gap: 6px; min-height: 34px; color: var(--muted); font-size: 13px; }
+    .edit-priority select { height: 36px; font-size: 13px; }
+    .edit-clear { color: #b91c1c; border-color: #fecaca; background: #fff5f5; }
+    .edit-due { flex: 1 1 100%; min-width: 0; }
+    .edit-actions { display: flex; gap: 6px; margin-left: auto; }
+    .btn-small {
+      height: 34px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--text);
+      font: 13px/1 inherit;
+      cursor: pointer;
+    }
+    .btn-small.primary { background: var(--primary); border-color: var(--primary); color: #fff; }
+    .btn-small:hover { border-color: #cbd5e1; }
+    .btn-small.primary:hover { background: var(--primary-hover); }
+
+    .empty { padding: 44px 24px; text-align: center; }
+    .empty-mark {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 12px;
+      border-radius: 17px;
+      display: grid;
+      place-items: center;
+      background: #eef3ff;
+      color: #6b8afd;
+      font-size: 23px;
+    }
+    .empty h2 { margin: 0 0 4px; font-size: 16px; }
+    .empty p { margin: 0; color: var(--muted); font-size: 13px; }
+
+    footer {
+      margin-top: 18px;
+      color: #8b93a3;
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.8;
+    }
+
+    footer code { background: #e9edf6; padding: 1px 5px; border-radius: 5px; font-size: 11px; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 24px;
+      transform: translate(-50%, 10px);
+      max-width: min(92vw, 460px);
+      padding: 10px 16px;
+      border-radius: 10px;
+      background: #172033;
+      color: #fff;
+      font-size: 13px;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .18s, transform .18s;
+      z-index: 10;
+    }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    @media (max-width: 620px) {
+      body { padding-top: 24px; }
+      .composer { padding: 14px; }
+      .composer-main { flex-direction: column; }
+      .composer-main .btn { width: 100%; }
+      .composer-meta { gap: 8px; }
+      .priority-field { flex: 1 1 100%; }
+      .composer-meta select { flex: 1; min-width: 0; }
+      .due-quick { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .due-chip { width: 100%; padding: 0 4px; }
+      .due-custom input[type="date"] { flex: 1 1 100%; min-width: 0; width: 100%; }
+      .due-custom input[type="time"] { flex: 1 1 100px; width: auto; }
+      .stats { padding: 10px 14px; }
+      .toolbar { padding: 10px 14px; align-items: stretch; }
+      .filters { width: 100%; }
+      .filter-btn { flex: 1; justify-content: center; }
+      .tools {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        width: 100%;
+        margin-left: 0;
+      }
+      .tools input { grid-column: 1 / -1; width: 100%; height: 40px; }
+      .tools select { grid-column: 1; width: 100%; max-width: none; height: 40px; }
+      .clear-btn { grid-column: 2; min-height: 40px; white-space: nowrap; }
+      .sort-hint { padding: 0 14px 10px; }
+      li.task { padding: 12px 14px; gap: 9px; }
+      .task-actions { flex-direction: row; gap: 2px; align-self: flex-start; }
+      .icon-btn {
+        min-width: 44px;
+        min-height: 40px;
+        padding: 5px 6px;
+        font-size: 13px;
+        background: #f8fafc;
+        border-color: #eef2f7;
+      }
+      .task-title { font-size: 14px; }
+      .edit-top { flex-wrap: wrap; }
+      .edit-actions { width: 100%; margin-left: 0; justify-content: flex-end; }
+      .btn-small { min-height: 40px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header>
+      <h1 class="brand">
+        <span class="brand-mark" aria-hidden="true">✓</span>
+        TaskFlow AI
+      </h1>
+      <p class="subtitle">V0.2 · 时间管理 · 截止日期、优先级、筛选、排序、编辑、搜索</p>
+    </header>
+
+    <section class="card" aria-label="待办清单">
+      <form class="composer" id="task-form" autocomplete="off">
+        <div class="composer-main">
+          <label for="task-input" hidden>任务名称</label>
+          <input
+            id="task-input"
+            name="title"
+            type="text"
+            maxlength="200"
+            placeholder="例如：提交云计算课程报告"
+            aria-label="任务名称"
+            required
+          >
+          <button class="btn" type="submit" id="add-btn">添加任务</button>
+        </div>
+        <div class="composer-meta">
+          <label class="priority-field" for="task-priority">
+            优先级
+            <select id="task-priority" aria-label="优先级">
+              <option value="1">高</option>
+              <option value="2" selected>中</option>
+              <option value="3">低</option>
+            </select>
+          </label>
+          <div class="due-field">
+            <span class="due-field-label">截止时间</span>
+            <div id="add-due-picker" class="due-picker"></div>
+          </div>
+        </div>
+      </form>
+
+      <div class="stats" aria-live="polite">
+        <span class="pill" id="stat-total">共 0 项</span>
+        <span class="pill" id="stat-open">待完成 0 项</span>
+        <span class="pill overdue" id="stat-overdue">逾期 0 项</span>
+      </div>
+
+      <div class="toolbar">
+        <div class="filters" id="filters" role="group" aria-label="任务筛选">
+          <button class="filter-btn active" type="button" data-filter="all">全部 <span class="filter-count" id="count-all">0</span></button>
+          <button class="filter-btn" type="button" data-filter="open">未完成 <span class="filter-count" id="count-open">0</span></button>
+          <button class="filter-btn" type="button" data-filter="done">已完成 <span class="filter-count" id="count-done">0</span></button>
+        </div>
+        <div class="tools">
+          <input id="search-input" type="search" placeholder="搜索任务…" aria-label="搜索任务">
+          <select id="sort-select" aria-label="排序方式">
+            <option value="smart">智能排序</option>
+            <option value="priority">按优先级</option>
+            <option value="due">按截止时间</option>
+            <option value="created">按创建时间</option>
+          </select>
+          <button class="clear-btn" type="button" id="clear-completed" disabled>清除已完成</button>
+        </div>
+      </div>
+
+      <p class="sort-hint" id="sort-hint">智能排序：逾期优先 → 截止时间 → 优先级 → 创建时间</p>
+
+      <div id="list-wrap">
+        <ul class="tasks" id="task-list" aria-label="任务列表"></ul>
+        <div class="empty" id="empty-state">
+          <div class="empty-mark" aria-hidden="true">☑</div>
+          <h2 id="empty-title">还没有任务</h2>
+          <p id="empty-text">先把今天最想完成的一件事加进来。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      刷新页面不会丢任务；换设备/换浏览器不会自动同步。<br>
+      当前使用 <code>localStorage</code>，云端同步将在 V0.3 加入。<br>
+      截止日期不选时间时，按当天 23:59 判定逾期；V0.2 暂未接入 AI，智能排序是规则排序，AI 提取将在 V0.4 加入。
+    </footer>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var STORAGE_KEY = "taskflow.v2.tasks";
+      var LEGACY_KEY = "taskflow.v1.tasks";
+      var MAX_TITLE = 200;
+      var PRIORITY_LABEL = { 1: "高", 2: "中", 3: "低" };
+
+      var tasks = loadTasks();
+      var filter = "all";
+      var sortMode = "smart";
+      var query = "";
+      var editingId = null;
+      var lastAdd = { title: "", at: 0 };
+      var toastTimer = null;
+
+      var form = document.getElementById("task-form");
+      var input = document.getElementById("task-input");
+      var prioritySelect = document.getElementById("task-priority");
+      var addBtn = document.getElementById("add-btn");
+      var list = document.getElementById("task-list");
+      var emptyState = document.getElementById("empty-state");
+      var emptyTitle = document.getElementById("empty-title");
+      var emptyText = document.getElementById("empty-text");
+      var totalEl = document.getElementById("stat-total");
+      var openEl = document.getElementById("stat-open");
+      var overdueEl = document.getElementById("stat-overdue");
+      var countAll = document.getElementById("count-all");
+      var countOpen = document.getElementById("count-open");
+      var countDone = document.getElementById("count-done");
+      var filters = document.getElementById("filters");
+      var searchInput = document.getElementById("search-input");
+      var sortSelect = document.getElementById("sort-select");
+      var sortHintEl = document.getElementById("sort-hint");
+      var clearBtn = document.getElementById("clear-completed");
+      var toastEl = document.getElementById("toast");
+      var addDuePicker = null;
+      var activeEditPicker = null;
+      var subscribers = [];
+
+      function uid() {
+        if (window.crypto && typeof window.crypto.randomUUID === "function") {
+          return window.crypto.randomUUID();
+        }
+        return "t-" + Date.now().toString(36) + "-" + Math.random().toString(36).slice(2, 10);
+      }
+
+      function normalizeDate(value) {
+        if (!value) return null;
+        var date = new Date(value);
+        return isNaN(date.getTime()) ? null : date.toISOString();
+      }
+
+      function normalizeTask(item) {
+        var priority = Number(item.priority);
+        var dueAt = normalizeDate(item.dueAt);
+        var dueHasTime = item.dueHasTime === true;
+        if (item.dueAt && item.dueHasTime === undefined) {
+          var parsedDue = new Date(item.dueAt);
+          dueHasTime = !(parsedDue.getHours() === 23 && parsedDue.getMinutes() === 59);
+        }
+        return {
+          id: typeof item.id === "string" && item.id ? item.id : uid(),
+          title: String(item.title || "").trim().slice(0, MAX_TITLE),
+          completed: Boolean(item.completed),
+          priority: priority === 1 || priority === 2 || priority === 3 ? priority : 2,
+          dueAt: dueAt,
+          dueHasTime: dueHasTime,
+          createdAt: normalizeDate(item.createdAt) || new Date().toISOString(),
+          updatedAt: normalizeDate(item.updatedAt) || null
+        };
+      }
+
+      function taskSnapshot() {
+        return tasks.map(function (task) {
+          return {
+            id: task.id,
+            title: task.title,
+            completed: task.completed,
+            priority: task.priority,
+            dueAt: task.dueAt,
+            dueHasTime: task.dueHasTime,
+            createdAt: task.createdAt,
+            updatedAt: task.updatedAt
+          };
+        });
+      }
+
+      function notifySubscribers() {
+        subscribers.forEach(function (listener) {
+          try {
+            listener(taskSnapshot());
+          } catch (error) {
+            // A broken feature module must not break the task list.
+            if (window.console && window.console.error) window.console.error(error);
+          }
+        });
+      }
+
+      function loadTasks() {
+        var raw;
+        try {
+          raw = window.localStorage.getItem(STORAGE_KEY);
+          if (!raw) raw = window.localStorage.getItem(LEGACY_KEY);
+        } catch (error) {
+          return [];
+        }
+        if (!raw) return [];
+        try {
+          var parsed = JSON.parse(raw);
+          if (!Array.isArray(parsed)) return [];
+          return parsed
+            .filter(function (item) {
+              return item && typeof item.title === "string" && item.title.trim();
+            })
+            .map(normalizeTask);
+        } catch (error) {
+          return [];
+        }
+      }
+
+      function saveTasks() {
+        try {
+          window.localStorage.setItem(STORAGE_KEY, JSON.stringify(tasks));
+          notifySubscribers();
+          return true;
+        } catch (error) {
+          showToast("保存失败：浏览器可能禁用了本地存储");
+          return false;
+        }
+      }
+
+      function showToast(message) {
+        toastEl.textContent = message;
+        toastEl.classList.add("show");
+        if (toastTimer) window.clearTimeout(toastTimer);
+        toastTimer = window.setTimeout(function () {
+          toastEl.classList.remove("show");
+        }, 2200);
+      }
+
+      function pad(value) { return String(value).padStart(2, "0"); }
+
+      function localDateValue(iso) {
+        if (!iso) return "";
+        var date = new Date(iso);
+        if (isNaN(date.getTime())) return "";
+        return date.getFullYear() + "-" + pad(date.getMonth() + 1) + "-" + pad(date.getDate());
+      }
+
+      function localTimeValue(iso) {
+        if (!iso) return "";
+        var date = new Date(iso);
+        if (isNaN(date.getTime())) return "";
+        return pad(date.getHours()) + ":" + pad(date.getMinutes());
+      }
+
+      function combineLocal(dateValue, timeValue) {
+        if (!dateValue) return null;
+        var parts = dateValue.split("-").map(Number);
+        if (parts.length !== 3 || !parts[0] || !parts[1] || !parts[2]) return null;
+        var date = new Date(parts[0], parts[1] - 1, parts[2]);
+        if (date.getFullYear() !== parts[0] || date.getMonth() !== parts[1] - 1 || date.getDate() !== parts[2]) {
+          return null;
+        }
+        if (timeValue) {
+          var time = timeValue.split(":").map(Number);
+          if (time.length !== 2 || isNaN(time[0]) || isNaN(time[1])) return null;
+          date.setHours(time[0], time[1], 0, 0);
+          return { date: date, hasTime: true };
+        }
+        date.setHours(23, 59, 0, 0);
+        return { date: date, hasTime: false };
+      }
+
+      function startOfDay(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+      }
+
+      function sameDay(a, b) {
+        return a.getFullYear() === b.getFullYear() &&
+          a.getMonth() === b.getMonth() &&
+          a.getDate() === b.getDate();
+      }
+
+      function weekendDate() {
+        var date = new Date();
+        var daysUntilSunday = (7 - date.getDay()) % 7;
+        date.setDate(date.getDate() + daysUntilSunday);
+        date.setHours(23, 59, 0, 0);
+        return date;
+      }
+
+      function quickDue(mode) {
+        var date = new Date();
+        if (mode === "today") {
+          date.setHours(23, 59, 0, 0);
+          return date;
+        }
+        if (mode === "tomorrow") {
+          date.setDate(date.getDate() + 1);
+          date.setHours(23, 59, 0, 0);
+          return date;
+        }
+        if (mode === "weekend") return weekendDate();
+        return null;
+      }
+
+      function formatDue(iso, hasTime) {
+        if (!iso) return "";
+        var date = new Date(iso);
+        if (isNaN(date.getTime())) return "";
+        var now = new Date();
+        var days = Math.round((startOfDay(date) - startOfDay(now)) / 86400000);
+        var relative = days === 0 ? "今天" : days === 1 ? "明天" : days === -1 ? "昨天" : "";
+        var dateText = (date.getFullYear() === now.getFullYear() ? "" : date.getFullYear() + "年") +
+          (date.getMonth() + 1) + "月" + date.getDate() + "日";
+        var timeText = hasTime ? pad(date.getHours()) + ":" + pad(date.getMinutes()) : "全天";
+        return (relative ? relative + " · " : "") + dateText + " · " + timeText;
+      }
+
+      function formatCreated(iso) {
+        if (!iso) return "";
+        var date = new Date(iso);
+        if (isNaN(date.getTime())) return "";
+        return pad(date.getMonth() + 1) + "-" + pad(date.getDate()) + " " +
+          pad(date.getHours()) + ":" + pad(date.getMinutes());
+      }
+
+      function isPastDue(iso) {
+        return Boolean(iso) && new Date(iso).getTime() < Date.now();
+      }
+
+      function isOverdue(task) {
+        return Boolean(task.dueAt) && !task.completed && isPastDue(task.dueAt);
+      }
+
+      function DuePicker(root, dueAt, dueHasTime) {
+        this.root = root;
+        this.dueAt = normalizeDate(dueAt);
+        this.dueHasTime = Boolean(dueHasTime);
+        this.customOpen = false;
+        this.mode = this.dueAt ? this.detectMode() : "none";
+        this.render();
+      }
+
+      DuePicker.prototype.detectMode = function () {
+        if (!this.dueAt || this.dueHasTime) return this.dueAt ? "custom" : "none";
+        var date = new Date(this.dueAt);
+        if (date.getHours() !== 23 || date.getMinutes() !== 59) return "custom";
+        var now = new Date();
+        if (sameDay(date, now)) return "today";
+        var tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        if (sameDay(date, tomorrow)) return "tomorrow";
+        if (sameDay(date, weekendDate())) return "weekend";
+        return "custom";
+      };
+
+      DuePicker.prototype.getDue = function () {
+        return { dueAt: this.dueAt, dueHasTime: this.dueHasTime };
+      };
+
+      DuePicker.prototype.setDue = function (dueAt, dueHasTime, mode) {
+        this.dueAt = normalizeDate(dueAt);
+        this.dueHasTime = Boolean(dueHasTime);
+        this.mode = mode || (this.dueAt ? "custom" : "none");
+        this.customOpen = false;
+        this.render();
+      };
+
+      DuePicker.prototype.reset = function () {
+        this.setDue(null, false, "none");
+      };
+
+      DuePicker.prototype.summaryText = function () {
+        if (!this.dueAt) return "无截止日期";
+        return "截止 " + formatDue(this.dueAt, this.dueHasTime);
+      };
+
+      DuePicker.prototype.updateWarning = function (dateInput, timeInput, warningEl) {
+        var combined = combineLocal(dateInput.value, timeInput.value);
+        if (!combined) {
+          warningEl.textContent = "请选择有效的日期";
+          warningEl.hidden = false;
+          return;
+        }
+        if (combined.date.getTime() < Date.now()) {
+          warningEl.textContent = "所选时间已过去，保存后会立即标为逾期";
+          warningEl.hidden = false;
+        } else {
+          warningEl.textContent = "";
+          warningEl.hidden = true;
+        }
+      };
+
+      DuePicker.prototype.applyCustom = function (dateInput, timeInput, warningEl) {
+        var combined = combineLocal(dateInput.value, timeInput.value);
+        if (!combined) {
+          warningEl.textContent = "请选择有效的日期";
+          warningEl.hidden = false;
+          return;
+        }
+        this.setDue(combined.date.toISOString(), combined.hasTime, "custom");
+      };
+
+      DuePicker.prototype.render = function () {
+        var picker = this;
+        this.root.textContent = "";
+
+        var quick = document.createElement("div");
+        quick.className = "due-quick";
+
+        [
+          { key: "none", label: "无截止日期" },
+          { key: "today", label: "今天" },
+          { key: "tomorrow", label: "明天" },
+          { key: "weekend", label: "本周末" },
+          { key: "custom", label: "自定义" }
+        ].forEach(function (option) {
+          var button = document.createElement("button");
+          button.type = "button";
+          button.className = "due-chip" + ((picker.mode === option.key) ? " active" : "");
+          button.textContent = option.label;
+          button.addEventListener("click", function () {
+            if (option.key === "custom") {
+              picker.customOpen = true;
+              picker.mode = "custom";
+              picker.render();
+              return;
+            }
+            if (option.key === "none") {
+              picker.setDue(null, false, "none");
+              return;
+            }
+            var date = quickDue(option.key);
+            picker.setDue(date.toISOString(), false, option.key);
+          });
+          quick.appendChild(button);
+        });
+        this.root.appendChild(quick);
+
+        var custom = document.createElement("div");
+        custom.className = "due-custom";
+        custom.hidden = !this.customOpen;
+
+        var dateInput = document.createElement("input");
+        dateInput.type = "date";
+        dateInput.setAttribute("aria-label", "自定义截止日期");
+        dateInput.value = this.dueAt ? localDateValue(this.dueAt) : localDateValue(new Date().toISOString());
+
+        var timeInput = document.createElement("input");
+        timeInput.type = "time";
+        timeInput.setAttribute("aria-label", "自定义截止时间，可留空");
+        timeInput.value = this.dueAt && this.dueHasTime ? localTimeValue(this.dueAt) : "";
+
+        var confirm = document.createElement("button");
+        confirm.type = "button";
+        confirm.className = "due-confirm";
+        confirm.textContent = "确定";
+
+        var cancel = document.createElement("button");
+        cancel.type = "button";
+        cancel.className = "due-cancel";
+        cancel.textContent = "取消";
+
+        var customWarning = document.createElement("span");
+        customWarning.className = "due-warning";
+        customWarning.hidden = true;
+        customWarning.setAttribute("aria-live", "polite");
+
+        var customHint = document.createElement("span");
+        customHint.className = "due-hint";
+        customHint.textContent = "时间可留空；不选时间按当天 23:59 判定逾期";
+
+        dateInput.addEventListener("input", function () {
+          picker.updateWarning(dateInput, timeInput, customWarning);
+        });
+        timeInput.addEventListener("input", function () {
+          picker.updateWarning(dateInput, timeInput, customWarning);
+        });
+        confirm.addEventListener("click", function () {
+          picker.applyCustom(dateInput, timeInput, customWarning);
+        });
+        cancel.addEventListener("click", function () {
+          picker.customOpen = false;
+          picker.mode = picker.dueAt ? picker.detectMode() : "none";
+          picker.render();
+        });
+
+        custom.appendChild(dateInput);
+        custom.appendChild(timeInput);
+        custom.appendChild(confirm);
+        custom.appendChild(cancel);
+        custom.appendChild(customWarning);
+        custom.appendChild(customHint);
+        this.root.appendChild(custom);
+
+        var summaryRow = document.createElement("div");
+        summaryRow.className = "due-summary-row";
+
+        var summary = document.createElement("span");
+        summary.className = "due-summary" + (this.dueAt ? "" : " empty");
+        summary.textContent = this.summaryText();
+        summaryRow.appendChild(summary);
+
+        if (this.dueAt) {
+          var clear = document.createElement("button");
+          clear.type = "button";
+          clear.className = "due-clear";
+          clear.textContent = "清除截止日期";
+          clear.addEventListener("click", function () {
+            picker.setDue(null, false, "none");
+          });
+          summaryRow.appendChild(clear);
+        }
+
+        var warning = document.createElement("span");
+        warning.className = "due-warning";
+        warning.hidden = !isPastDue(this.dueAt);
+        warning.textContent = isPastDue(this.dueAt) ? "所选时间已过去，保存后会立即标为逾期" : "";
+        summaryRow.appendChild(warning);
+
+        var hint = document.createElement("span");
+        hint.className = "due-hint";
+        hint.textContent = this.dueAt && !this.dueHasTime
+          ? "未选时间：按当天 23:59 判定逾期"
+          : "时间可选；不选时间时，按当天 23:59 判定逾期";
+        summaryRow.appendChild(hint);
+
+        if (!this.customOpen) this.root.appendChild(summaryRow);
+      };
+
+      function dueValue(task) {
+        return task.dueAt ? new Date(task.dueAt).getTime() : Number.MAX_SAFE_INTEGER;
+      }
+
+      function createdValue(task) {
+        var time = new Date(task.createdAt).getTime();
+        return isNaN(time) ? 0 : time;
+      }
+
+      function priorityValue(task) {
+        return task.priority === 1 || task.priority === 2 || task.priority === 3 ? task.priority : 2;
+      }
+
+      function filteredTasks() {
+        var normalizedQuery = query.trim().toLowerCase();
+        return tasks.filter(function (task) {
+          if (filter === "open" && task.completed) return false;
+          if (filter === "done" && !task.completed) return false;
+          if (normalizedQuery && task.title.toLowerCase().indexOf(normalizedQuery) === -1) return false;
+          return true;
+        });
+      }
+
+      function sortedTasks() {
+        var result = filteredTasks().slice();
+        result.sort(function (a, b) {
+          if (a.completed !== b.completed) return a.completed ? 1 : -1;
+
+          if (sortMode === "priority") {
+            return priorityValue(a) - priorityValue(b) ||
+              dueValue(a) - dueValue(b) ||
+              createdValue(b) - createdValue(a);
+          }
+          if (sortMode === "due") {
+            return dueValue(a) - dueValue(b) ||
+              priorityValue(a) - priorityValue(b) ||
+              createdValue(b) - createdValue(a);
+          }
+          if (sortMode === "created") {
+            return createdValue(b) - createdValue(a);
+          }
+
+          var overdueA = isOverdue(a) ? 0 : 1;
+          var overdueB = isOverdue(b) ? 0 : 1;
+          return overdueA - overdueB ||
+            dueValue(a) - dueValue(b) ||
+            priorityValue(a) - priorityValue(b) ||
+            createdValue(b) - createdValue(a);
+        });
+        return result;
+      }
+
+      function addTask() {
+        var title = input.value.trim().replace(/\s+/g, " ");
+        if (!title) {
+          showToast("先写一个任务名称");
+          input.focus();
+          return false;
+        }
+        if (title.length > MAX_TITLE) {
+          showToast("任务名称最多 " + MAX_TITLE + " 个字符");
+          return false;
+        }
+
+        var now = Date.now();
+        if (title === lastAdd.title && now - lastAdd.at < 1200) return false;
+
+        var priority = Number(prioritySelect.value);
+        var due = addDuePicker.getDue();
+
+        tasks.unshift({
+          id: uid(),
+          title: title,
+          completed: false,
+          priority: priority === 1 || priority === 3 ? priority : 2,
+          dueAt: due.dueAt,
+          dueHasTime: due.dueHasTime,
+          createdAt: new Date().toISOString(),
+          updatedAt: null
+        });
+        lastAdd = { title: title, at: now };
+        saveTasks();
+        render();
+        input.value = "";
+        addDuePicker.reset();
+        prioritySelect.value = "2";
+        input.focus();
+        return true;
+      }
+
+      function toggleTask(id) {
+        for (var i = 0; i < tasks.length; i += 1) {
+          if (tasks[i].id === id) {
+            tasks[i].completed = !tasks[i].completed;
+            tasks[i].updatedAt = new Date().toISOString();
+            break;
+          }
+        }
+        saveTasks();
+        render();
+      }
+
+      function deleteTask(id) {
+        tasks = tasks.filter(function (task) { return task.id !== id; });
+        if (editingId === id) editingId = null;
+        saveTasks();
+        render();
+      }
+
+      function clearCompleted() {
+        var completed = tasks.filter(function (task) { return task.completed; }).length;
+        if (!completed) return;
+        if (!window.confirm("清除 " + completed + " 项已完成任务？")) return;
+        tasks = tasks.filter(function (task) { return !task.completed; });
+        saveTasks();
+        render();
+      }
+
+      function startEdit(id) {
+        editingId = id;
+        render();
+        var editInput = list.querySelector(".edit-form input[type='text']");
+        if (editInput) {
+          editInput.focus();
+          editInput.select();
+        }
+      }
+
+      function cancelEdit() {
+        editingId = null;
+        render();
+      }
+
+      function saveEdit(id) {
+        var editForm = list.querySelector(".edit-form");
+        if (!editForm) return;
+        var titleInput = editForm.querySelector("input[type='text']");
+        var editPriority = editForm.querySelector("select");
+        var due = activeEditPicker ? activeEditPicker.getDue() : { dueAt: null, dueHasTime: false };
+        var title = titleInput.value.trim().replace(/\s+/g, " ");
+        if (!title) {
+          showToast("任务名称不能为空");
+          titleInput.focus();
+          return;
+        }
+        if (title.length > MAX_TITLE) {
+          showToast("任务名称最多 " + MAX_TITLE + " 个字符");
+          return;
+        }
+        for (var i = 0; i < tasks.length; i += 1) {
+          if (tasks[i].id === id) {
+            tasks[i].title = title;
+            tasks[i].priority = Number(editPriority.value) === 1 || Number(editPriority.value) === 3
+              ? Number(editPriority.value) : 2;
+            tasks[i].dueAt = due.dueAt;
+            tasks[i].dueHasTime = due.dueHasTime;
+            tasks[i].updatedAt = new Date().toISOString();
+            break;
+          }
+        }
+        editingId = null;
+        activeEditPicker = null;
+        saveTasks();
+        render();
+      }
+
+      function renderTask(task) {
+        var li = document.createElement("li");
+        var priority = priorityValue(task);
+        li.className = "task priority-" + priority +
+          (task.completed ? " done" : "") +
+          (isOverdue(task) ? " overdue" : "");
+
+        var checkbox = document.createElement("input");
+        checkbox.className = "check";
+        checkbox.type = "checkbox";
+        checkbox.checked = task.completed;
+        checkbox.setAttribute("aria-label", (task.completed ? "标记未完成：" : "标记完成：") + task.title);
+        checkbox.addEventListener("change", function () { toggleTask(task.id); });
+
+        var main = document.createElement("div");
+        main.className = "task-main";
+
+        var head = document.createElement("div");
+        head.className = "task-head";
+
+        var title = document.createElement("p");
+        title.className = "task-title";
+        title.textContent = task.title;
+        head.appendChild(title);
+
+        var priorityBadge = document.createElement("span");
+        priorityBadge.className = "badge priority-" + priority;
+        priorityBadge.textContent = PRIORITY_LABEL[priority];
+        head.appendChild(priorityBadge);
+
+        if (isOverdue(task)) {
+          var overdueBadge = document.createElement("span");
+          overdueBadge.className = "badge overdue";
+          overdueBadge.textContent = "已逾期";
+          head.appendChild(overdueBadge);
+        }
+
+        var meta = document.createElement("p");
+        meta.className = "task-meta";
+
+        if (task.dueAt) {
+          var due = document.createElement("span");
+          due.className = "due" + (isOverdue(task) ? " overdue-text" : "");
+          due.textContent = "截止 " + formatDue(task.dueAt, task.dueHasTime);
+          meta.appendChild(due);
+        } else {
+          var noDue = document.createElement("span");
+          noDue.textContent = "无截止时间";
+          meta.appendChild(noDue);
+        }
+
+        var created = document.createElement("span");
+        created.textContent = "创建于 " + formatCreated(task.createdAt);
+        meta.appendChild(created);
+
+        main.appendChild(head);
+        main.appendChild(meta);
+
+        var actions = document.createElement("div");
+        actions.className = "task-actions";
+
+        var edit = document.createElement("button");
+        edit.type = "button";
+        edit.className = "icon-btn";
+        edit.textContent = "编辑";
+        edit.setAttribute("aria-label", "编辑任务：" + task.title);
+        edit.addEventListener("click", function () { startEdit(task.id); });
+
+        var del = document.createElement("button");
+        del.type = "button";
+        del.className = "icon-btn delete";
+        del.textContent = "删除";
+        del.setAttribute("aria-label", "删除任务：" + task.title);
+        del.addEventListener("click", function () { deleteTask(task.id); });
+
+        actions.appendChild(edit);
+        actions.appendChild(del);
+        li.appendChild(checkbox);
+        li.appendChild(main);
+        li.appendChild(actions);
+        return li;
+      }
+
+      function renderEdit(task) {
+        var li = document.createElement("li");
+        li.className = "task editing priority-" + priorityValue(task);
+
+        var editForm = document.createElement("form");
+        editForm.className = "edit-form";
+        editForm.addEventListener("submit", function (event) {
+          event.preventDefault();
+          saveEdit(task.id);
+        });
+
+        var titleInput = document.createElement("input");
+        titleInput.type = "text";
+        titleInput.maxLength = MAX_TITLE;
+        titleInput.value = task.title;
+        titleInput.setAttribute("aria-label", "编辑任务名称");
+        titleInput.addEventListener("keydown", function (event) {
+          if (event.key === "Escape") cancelEdit();
+        });
+
+        var actions = document.createElement("div");
+        actions.className = "edit-actions";
+
+        var save = document.createElement("button");
+        save.type = "submit";
+        save.className = "btn-small primary";
+        save.textContent = "保存";
+
+        var cancel = document.createElement("button");
+        cancel.type = "button";
+        cancel.className = "btn-small";
+        cancel.textContent = "取消";
+        cancel.addEventListener("click", cancelEdit);
+
+        actions.appendChild(save);
+        actions.appendChild(cancel);
+
+        var top = document.createElement("div");
+        top.className = "edit-top";
+        top.appendChild(titleInput);
+        top.appendChild(actions);
+
+        var controls = document.createElement("div");
+        controls.className = "edit-controls";
+
+        var priorityLabel = document.createElement("label");
+        priorityLabel.className = "edit-priority";
+        priorityLabel.appendChild(document.createTextNode("优先级"));
+
+        var priority = document.createElement("select");
+        priority.setAttribute("aria-label", "编辑优先级");
+        [1, 2, 3].forEach(function (value) {
+          var option = document.createElement("option");
+          option.value = String(value);
+          option.textContent = PRIORITY_LABEL[value];
+          if (priorityValue(task) === value) option.selected = true;
+          priority.appendChild(option);
+        });
+        priorityLabel.appendChild(priority);
+
+        var dueHost = document.createElement("div");
+        dueHost.className = "edit-due";
+        activeEditPicker = new DuePicker(dueHost, task.dueAt, task.dueHasTime);
+
+        controls.appendChild(priorityLabel);
+        if (task.dueAt) {
+          var clearTop = document.createElement("button");
+          clearTop.type = "button";
+          clearTop.className = "btn-small edit-clear";
+          clearTop.textContent = "清除截止日期";
+          clearTop.addEventListener("click", function () {
+            if (activeEditPicker) activeEditPicker.setDue(null, false, "none");
+          });
+          controls.appendChild(clearTop);
+        }
+        controls.appendChild(dueHost);
+
+        editForm.appendChild(top);
+        editForm.appendChild(controls);
+        li.appendChild(editForm);
+        return li;
+      }
+
+      function render() {
+        activeEditPicker = null;
+        var total = tasks.length;
+        var open = tasks.filter(function (task) { return !task.completed; }).length;
+        var done = total - open;
+        var overdue = tasks.filter(isOverdue).length;
+        var visible = sortedTasks();
+
+        totalEl.textContent = "共 " + total + " 项";
+        openEl.textContent = "待完成 " + open + " 项";
+        overdueEl.textContent = "逾期 " + overdue + " 项";
+        countAll.textContent = String(total);
+        countOpen.textContent = String(open);
+        countDone.textContent = String(done);
+
+        Array.prototype.forEach.call(filters.querySelectorAll(".filter-btn"), function (button) {
+          var active = button.getAttribute("data-filter") === filter;
+          button.classList.toggle("active", active);
+          button.setAttribute("aria-pressed", active ? "true" : "false");
+        });
+
+        clearBtn.disabled = done === 0;
+        clearBtn.textContent = done ? "清除已完成 (" + done + ")" : "清除已完成";
+
+        if (sortMode === "priority") {
+          sortHintEl.textContent = "按优先级：高 → 中 → 低，同级按截止时间";
+        } else if (sortMode === "due") {
+          sortHintEl.textContent = "按截止时间：早 → 晚，无截止时间排最后";
+        } else if (sortMode === "created") {
+          sortHintEl.textContent = "按创建时间：新 → 旧";
+        } else {
+          sortHintEl.textContent = "智能排序：逾期优先 → 截止时间 → 优先级 → 创建时间";
+        }
+
+        list.textContent = "";
+        visible.forEach(function (task) {
+          list.appendChild(task.id === editingId ? renderEdit(task) : renderTask(task));
+        });
+
+        if (visible.length === 0) {
+          emptyState.hidden = false;
+          if (total === 0) {
+            emptyTitle.textContent = "还没有任务";
+            emptyText.textContent = "先把今天最想完成的一件事加进来。";
+          } else if (query.trim()) {
+            emptyTitle.textContent = "没有匹配的任务";
+            emptyText.textContent = "换个关键词试试，或清空搜索。";
+          } else if (filter === "done") {
+            emptyTitle.textContent = "还没有已完成任务";
+            emptyText.textContent = "完成一项后，它会出现在这里。";
+          } else if (filter === "open") {
+            emptyTitle.textContent = "没有未完成任务";
+            emptyText.textContent = "当前任务都完成了。";
+          } else {
+            emptyTitle.textContent = "没有可显示的任务";
+            emptyText.textContent = "调整筛选条件试试。";
+          }
+        } else {
+          emptyState.hidden = true;
+        }
+      }
+
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+        addTask();
+      });
+
+      filters.addEventListener("click", function (event) {
+        var button = event.target.closest(".filter-btn");
+        if (!button) return;
+        filter = button.getAttribute("data-filter") || "all";
+        render();
+      });
+
+      searchInput.addEventListener("input", function () {
+        query = searchInput.value;
+        render();
+      });
+
+      sortSelect.addEventListener("change", function () {
+        sortMode = sortSelect.value;
+        render();
+      });
+
+      clearBtn.addEventListener("click", clearCompleted);
+
+      input.addEventListener("keydown", function (event) {
+        if (event.key === "Escape") {
+          input.value = "";
+        }
+      });
+
+      // Integration surface for feature modules (cloud / AI / visualization).
+      // Keep this small and stable; feature code should not reach into private vars.
+      window.TaskFlow = {
+        version: "0.2.1",
+        getTasks: taskSnapshot,
+        getStorageKey: function () { return STORAGE_KEY; },
+        subscribe: function (listener) {
+          if (typeof listener !== "function") throw new TypeError("listener must be a function");
+          subscribers.push(listener);
+          listener(taskSnapshot());
+          return function unsubscribe() {
+            subscribers = subscribers.filter(function (item) { return item !== listener; });
+          };
+        },
+        replaceTasks: function (nextTasks) {
+          if (!Array.isArray(nextTasks)) throw new TypeError("replaceTasks expects an array");
+          tasks = nextTasks
+            .filter(function (item) { return item && typeof item.title === "string" && item.title.trim(); })
+            .map(normalizeTask);
+          editingId = null;
+          saveTasks();
+          render();
+        },
+        addTasks: function (nextTasks) {
+          if (!Array.isArray(nextTasks)) throw new TypeError("addTasks expects an array");
+          var normalized = nextTasks
+            .filter(function (item) { return item && typeof item.title === "string" && item.title.trim(); })
+            .map(normalizeTask);
+          tasks = normalized.concat(tasks);
+          saveTasks();
+          render();
+        }
+      };
+
+      // Migrate V0.1 data only after the DOM and toast helpers are ready.
+      try {
+        if (!window.localStorage.getItem(STORAGE_KEY) && window.localStorage.getItem(LEGACY_KEY)) {
+          saveTasks();
+        }
+      } catch (error) {
+        // Private mode / storage disabled: the page still works for this session.
+      }
+
+      addDuePicker = new DuePicker(document.getElementById("add-due-picker"), null, false);
+
+      render();
+      input.focus();
+    }());
+  </script>
+</body>
+</html>

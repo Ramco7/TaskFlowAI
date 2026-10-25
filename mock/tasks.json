@@ -1,0 +1,122 @@
+[
+  {
+    "id": "mock-001",
+    "title": "提交云计算课程报告",
+    "completed": false,
+    "priority": 1,
+    "dueAt": "2026-11-02T12:00:00.000Z",
+    "dueHasTime": true,
+    "createdAt": "2026-10-24T02:00:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "id": "mock-002",
+    "title": "整理上周项目讨论会纪要",
+    "completed": false,
+    "priority": 2,
+    "dueAt": "2026-10-24T10:00:00.000Z",
+    "dueHasTime": true,
+    "createdAt": "2026-10-23T01:30:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "id": "mock-003",
+    "title": "买牛奶",
+    "completed": false,
+    "priority": 3,
+    "dueAt": null,
+    "dueHasTime": false,
+    "createdAt": "2026-10-25T01:00:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "id": "mock-004",
+    "title": "阅读 CloudBase 静态托管文档",
+    "completed": true,
+    "priority": 2,
+    "dueAt": null,
+    "dueHasTime": false,
+    "createdAt": "2026-10-22T07:00:00.000Z",
+    "updatedAt": "2026-10-23T09:00:00.000Z"
+  },
+  {
+    "id": "mock-005",
+    "title": "给导师发阶段汇报邮件",
+    "completed": false,
+    "priority": 1,
+    "dueAt": "2026-10-26T14:00:00.000Z",
+    "dueHasTime": true,
+    "createdAt": "2026-10-25T00:00:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "id": "mock-006",
+    "title": "准备周三小组演示",
+    "completed": false,
+    "priority": 1,
+    "dueAt": "2026-10-28T01:00:00.000Z",
+    "dueHasTime": true,
+    "createdAt": "2026-10-25T03:00:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "id": "mock-007",
+    "title": "整理 AI 提取测试集 100 条",
+    "completed": false,
+    "priority": 2,
+    "dueAt": "2026-10-30T12:00:00.000Z",
+    "dueHasTime": false,
+    "createdAt": "2026-10-25T04:00:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "id": "mock-008",
+    "title": "把 Dashboard 接入 ECharts",
+    "completed": false,
+    "priority": 2,
+    "dueAt": "2026-10-31T12:00:00.000Z",
+    "dueHasTime": false,
+    "createdAt": "2026-10-25T05:00:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "id": "mock-009",
+    "title": "修复手机端日期选择器",
+    "completed": true,
+    "priority": 2,
+    "dueAt": "2026-10-25T12:00:00.000Z",
+    "dueHasTime": false,
+    "createdAt": "2026-10-24T08:00:00.000Z",
+    "updatedAt": "2026-10-25T08:30:00.000Z"
+  },
+  {
+    "id": "mock-010",
+    "title": "确认 CloudBase 数据库安全规则",
+    "completed": false,
+    "priority": 1,
+    "dueAt": "2026-11-05T12:00:00.000Z",
+    "dueHasTime": false,
+    "createdAt": "2026-10-25T06:00:00.000Z",
+    "updatedAt": null
+  },
+  {
+    "id": "mock-011",
+    "title": "写 Feature 2 的验收说明",
+    "completed": true,
+    "priority": 3,
+    "dueAt": null,
+    "dueHasTime": false,
+    "createdAt": "2026-10-21T06:00:00.000Z",
+    "updatedAt": "2026-10-22T06:00:00.000Z"
+  },
+  {
+    "id": "mock-012",
+    "title": "预约下周组会教室",
+    "completed": false,
+    "priority": 3,
+    "dueAt": "2026-10-27T12:00:00.000Z",
+    "dueHasTime": false,
+    "createdAt": "2026-10-25T07:00:00.000Z",
+    "updatedAt": null
+  }
+]

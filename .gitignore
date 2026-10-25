@@ -1,0 +1,19 @@
+dist/
+node_modules/
+.env
+.env.*
+*.local
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+
+# CloudBase local login state
+.cloudbase/
+tools/cloudbase-cli/home/
+
+# Chrome test profiles
+.chrome-profile*/
+.v0*/
+.cdp-profile/
+.ssh/
