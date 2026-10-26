@@ -4,7 +4,7 @@ window.TASKFLOW_AI_MOCK = {
     "receivedAt": "2026-10-25T09:30:00+08:00",
     "capturedAt": "2026-10-25T10:05:00+08:00",
     "timezone": "Asia/Shanghai",
-    "text": "班长：下周二上午 10 点在教学楼 A301 开项目讨论会。请大家在下周一晚上 8 点之前把汇报 PPT 发给我，记得带笔记本。另外论文模板已经上传学院网站。"
+    "text": "班长：下周二上午 10 点在教学楼 A301 开项目讨论会。请大家在下周一晚上 8 点之前把汇报 PPT 发给我。另外论文模板已经上传学院网站。"
   },
   "output": {
     "items": [
@@ -35,20 +35,6 @@ window.TASKFLOW_AI_MOCK = {
         "date_expression": "下周二上午 10 点",
         "confidence": 0.97,
         "needs_review": false
-      },
-      {
-        "type": "task",
-        "title": "会议当天带笔记本",
-        "priority": "normal",
-        "start_at": null,
-        "due_at": "2026-10-27T10:00:00+08:00",
-        "location": null,
-        "assignee": null,
-        "evidence": "记得带笔记本",
-        "time_precision": "day",
-        "date_expression": "会议当天",
-        "confidence": 0.72,
-        "needs_review": true
       },
       {
         "type": "note",

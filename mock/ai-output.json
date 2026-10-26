@@ -29,20 +29,6 @@
       "needs_review": false
     },
     {
-      "type": "task",
-      "title": "会议当天带笔记本",
-      "priority": "normal",
-      "start_at": null,
-      "due_at": "2026-10-27T10:00:00+08:00",
-      "location": null,
-      "assignee": null,
-      "evidence": "记得带笔记本",
-      "time_precision": "day",
-      "date_expression": "会议当天",
-      "confidence": 0.72,
-      "needs_review": true
-    },
-    {
       "type": "note",
       "title": "论文模板已上传学院网站",
       "priority": "low",
