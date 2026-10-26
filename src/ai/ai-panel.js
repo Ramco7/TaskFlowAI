@@ -60,7 +60,7 @@
     var parts = zoned ? zoned.split("T") : [];
     receivedDateEl.value = parts[0] || "";
     receivedTimeEl.value = parts[1] || "";
-    setStatus("已填入示例；当前是 Mock 演示，不会调用真实模型。", false);
+    setStatus("已填入示例；当前是 " + (selectedMode() === "real" ? "真实模型" : "Mock 演示") + "。", false);
   }
 
   function setStatus(message, isError) {
